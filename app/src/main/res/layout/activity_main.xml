@@ -83,5 +83,23 @@
             app:backgroundTint="@null" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="150dp">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:background="@drawable/custom_button"
+            android:onClick="credits"
+            android:text="Credits"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            app:backgroundTint="@null" />
+    </LinearLayout>
 
 </LinearLayout>
