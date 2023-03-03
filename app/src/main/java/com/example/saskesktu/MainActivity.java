@@ -32,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void help(View v)
     {
         Intent intent = new Intent(this, HelpActivity.class);
         startActivity(intent);
     }
+
+
 }

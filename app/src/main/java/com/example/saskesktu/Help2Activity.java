@@ -6,15 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class PlayActivity extends AppCompatActivity {
+public class Help2Activity extends AppCompatActivity{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
+        setContentView(R.layout.activity_help2);
     }
 
-    public void escape1 (View V){
+    public void escape2 (View V){
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
