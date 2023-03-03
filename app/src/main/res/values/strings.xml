@@ -1,18 +1,11 @@
 <resources>
     <string name="app_name">SaskesKTU</string>
-    <string name= "article_string">Article</string>
-    <string name= "article_subheading">Article Subheading</string>
-    <string name = "paragraph">  Žaidėjų tikslas šaškėse – nukirsti visas priešininko šaškes arba sudaryti tokią situaciją, kad priešininkui nebeliktų ėjimų.\n\n
+    <string name="article_string">Article</string>
+    <string name="article_subheading">Article Subheading</string>
+    <string name="paragraph">  Žaidėjų tikslas šaškėse – nukirsti visas priešininko šaškes arba sudaryti tokią situaciją, kad priešininkui nebeliktų ėjimų.\n\n
         Šaškės žaidžiamos paeiliui, po vieną ėjimą ant juodos spalvos langelių. Žaidimą pradeda <b>šviesiosios</b> (<i>jei nesusitarta kitaip</i>) ir einama <b>tik įstrižai</b>, po vieną langelį (taip vaikšto paprastos šaškės, nevirtusios damomis).\n\n
         Priešininko šaškė nukertama peršokant per ją, kirtimas yra privalomas ir gali būti atliktas tik pirmyn(<i>priklausomai nuo nustatytų žaidimo taisyklių</i>).\n\n
         Vieno ėjimo metu gali būti atlikti <b>keli kirtimai</b>, jeigu peršokus šaškę atsiduriama langelyje šalia kitos kertamos šaškės. Iki galinės linijos („Karalių eilės“) nuėjusi šaškė pavirsta dama, kuriai suteikiamos papildomos galios – ji gali vaikščioti pirmyn ir atgal po vieną langelį(taip pat priklausomai nuo nustatytų žaidimo taisyklių). \n\n Šaškė pavirsti dama gali ir kirtimo metu, jeigu viename iš kirtimo etapų ji atsiduria ant galinės linijos.
-
-
-
-
-
-
-
 
     </string>
 </resources>

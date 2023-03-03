@@ -33,9 +33,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void help(View v)
-    {
+    public void help(View v) {
         Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
+    }
+
+    public void credits(View v)
+    {
+        Intent intent = new Intent(this, CreditsActivity.class);
         startActivity(intent);
     }
 
