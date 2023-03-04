@@ -1,5 +1,6 @@
 package com.example.saskesktu;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         //Background dainos failas
         backgroundSong=MediaPlayer.create(MainActivity.this,R.raw.background_music);
+
+        //Paslepiamas ActionBar'as
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 
     // Reaguoja į "Play" mygtuko paspaudimą, metodo pavadinimas sutampa su mygtuko argumentu "onClick"

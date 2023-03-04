@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/article_string"
-            android:textColor="@color/white"
+            android:textColor="#000000"
             android:textSize="48sp"
             android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/paragraph"
-                android:textColor="@color/white"
+                    android:textColor="#000000"
                 android:textSize="20sp" />
 
 
@@ -59,8 +59,10 @@
             android:id="@+id/button4"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:onClick="escape2"
-            android:text="X" />
+            android:onClick="escape"
+            android:text="X"
+            android:background="#A16E570A"
+            app:backgroundTint="@null"/>
     </LinearLayout>
 
 </LinearLayout>
