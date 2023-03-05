@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/boardImageView"
+        android:id="@+id/cboardImageView"
         android:layout_width="370dp"
         android:layout_height="370dp"
         android:layout_gravity="center"
@@ -17,7 +17,7 @@
 
 
     <LinearLayout
-        android:id="@+id/parent_layout"
+        android:id="@+id/cparent_layout"
         android:layout_width="348dp"
         android:layout_height="350dp"
         android:layout_gravity="center"
@@ -25,662 +25,748 @@
 
 
         <LinearLayout
-            android:id="@+id/layout_row8"
+            android:id="@+id/clayout_row8"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
 
-            <Button
-                android:id="@+id/button0"
+            <ImageButton
+                android:id="@+id/c0"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/dark_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c1"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                android:id="@+id/button2"
+            <ImageButton
+                android:id="@+id/c2"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/dark_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c3"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                android:id="@+id/button4"
+            <ImageButton
+                android:id="@+id/c4"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/dark_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c5"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                android:id="@+id/button6"
+            <ImageButton
+                android:id="@+id/c6"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/dark_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c7"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/layout_row1"
+            android:id="@+id/clayout_row1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
+            <ImageButton
+                android:id="@+id/c8"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:clickable="false"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                android:id="@+id/button9"
+            <ImageButton
+                android:id="@+id/c9"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/dark_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c10"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                android:id="@+id/button11"
+            <ImageButton
+                android:id="@+id/c11"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/dark_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c12"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                android:id="@+id/button13"
+            <ImageButton
+                android:id="@+id/c13"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/dark_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c14"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                android:id="@+id/button15"
+            <ImageButton
+                android:id="@+id/c15"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/dark_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/layout_row2"
+            android:id="@+id/clayout_row2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
+            <ImageButton
+                android:id="@+id/c16"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/dark_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button16"
+            <ImageButton
+                android:id="@+id/c17"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c18"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:background="@drawable/dark_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button18"
+            <ImageButton
+                android:id="@+id/c19"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c20"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:background="@drawable/dark_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button20"
+            <ImageButton
+                android:id="@+id/c21"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c22"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:background="@drawable/dark_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button22"
+            <ImageButton
+                android:id="@+id/c23"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/layout_row3"
+            android:id="@+id/clayout_row3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/c24"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c25"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
+
+            <ImageButton
+                android:id="@+id/c26"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button25"
+            <ImageButton
+                android:id="@+id/c27"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
-
-            <Button
-                android:id="@+id/button27"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
+            <ImageButton
+                android:id="@+id/c28"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button29"
+            <ImageButton
+                android:id="@+id/c29"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c30"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"
+                android:background="@drawable/blank_square"/>
 
-            <Button
-                android:id="@+id/button31"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_row4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/button32"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
+            <ImageButton
+                android:id="@+id/c31"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
-
-            <Button
-                android:id="@+id/button34"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
-
-            <Button
-                android:id="@+id/button36"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
-
-            <Button
-                android:id="@+id/button38"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/layout_row5"
+            android:id="@+id/clayout_row4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
+                android:id="@+id/c32"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/blank_square"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c33"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c34"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button43"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
+            <ImageButton
+                android:id="@+id/c35"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button45"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
+            <ImageButton
+                android:id="@+id/c36"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button47"
+            <ImageButton
+                android:id="@+id/c37"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/blank_square"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button41"
+            <ImageButton
+                android:id="@+id/c38"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/blank_square"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c39"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/blank_square"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/clayout_row5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/c40"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/blank_square"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c41"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/light_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c42"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/blank_square"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c43"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/light_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c44"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/blank_square"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c45"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/light_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c46"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/blank_square"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c47"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/light_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_row6"
+            android:id="@+id/clayout_row6"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
 
-            <Button
-                android:id="@+id/button48"
-                style="?android:attr/buttonStyleSmall"
+            <ImageButton
+                android:id="@+id/c48"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/light_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c49"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button50"
+            <ImageButton
+                android:id="@+id/c50"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/light_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
-
-            <Button
-                android:id="@+id/button52"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
+            <ImageButton
+                android:id="@+id/c51"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button54"
+            <ImageButton
+                android:id="@+id/c52"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/light_piece"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c53"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c54"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/light_piece"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c55"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/blank_square"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/layout_row7"
+            android:id="@+id/clayout_row7"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
+                android:id="@+id/c56"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/blank_square"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c57"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/light_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
+
+            <ImageButton
+                android:id="@+id/c58"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button57"
+            <ImageButton
+                android:id="@+id/c59"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/light_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square"
-                android:contextClickable="false" />
-
-            <Button
-                android:id="@+id/button59"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/blank_square" />
-
-            <Button
+            <ImageButton
+                android:id="@+id/c60"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button61"
+            <ImageButton
+                android:id="@+id/c61"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/light_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/c62"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/blank_square"
-                android:contextClickable="false" />
+                android:onClick="onCheckerClick"/>
 
-            <Button
-                android:id="@+id/button63"
+            <ImageButton
+                android:id="@+id/c63"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square" />
+                android:background="@drawable/light_piece"
+                android:contextClickable="false"
+                android:onClick="onCheckerClick"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 
