@@ -390,7 +390,7 @@ public class BoardLogic {
                         {
                             if(possibleMoves[i] != -1) {
                                 if (possibleMoves[i] == placeId) {
-                                    Kirtimas(LayoutView, C, pressedId, placeId, "Light");
+                                    Kirtimas(LayoutView, C, pressedId, placeId, "Black");
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
