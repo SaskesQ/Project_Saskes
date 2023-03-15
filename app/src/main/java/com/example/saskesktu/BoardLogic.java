@@ -45,15 +45,18 @@ public class BoardLogic {
 
     /**
      * Patikrina ar langelis yra tuščias
+     * ** Pakoreguota dėl karalienės judėjimo
      */
     boolean IsPlaceFree(int placeId, String color)
     {
-        if(statusArray[placeId] == color)
-        {
-            return false;
-        }else{
-            return true;
+        String[] colors = {"Black", "Light", "QBlack", "QLight"};
+        for(int i = 0; i < 4; i++){
+            if(statusArray[placeId] == colors[i])
+            {
+                return false;
+            }
         }
+        return true;
     }
 
     /**
@@ -61,15 +64,15 @@ public class BoardLogic {
      */
     boolean IsEnemyChecker(int placeId, String color)
     {
-        if(color == "Black")
+        if(color == "Black" || color == "QBlack")
         {
-            if(statusArray[placeId] == "Light")
+            if(statusArray[placeId] == "Light" || statusArray[placeId] == "QLight")
             {
                 return true;
             }
-        }else if (color == "Light")
+        }else if (color == "Light" || color == "QLight")
         {
-            if(statusArray[placeId] == "Black")
+            if(statusArray[placeId] == "Black" || statusArray[placeId] == "QBlack")
             {
                 return true;
             }
@@ -79,6 +82,7 @@ public class BoardLogic {
 
     /**
      * Suranda visus galimus kirtimus
+     * ** Pakoreguota funkcija. Suranda ir karalienes galimus kirtimus
      */
     int[] FindAllPossibleKirtimai(int placeId, String color) {
         int[] possibleMoves = new int[40];
@@ -107,13 +111,13 @@ public class BoardLogic {
         for(int i = 0; i < 40; i++)
         {
             Log.d("t", Integer.toString(possibleMoves[i]));
-            if(color == "Black")
+            if(color == "Black" || color == "QBlack")
             {
                 if(statusArray[possibleMoves[i]] != "Light")
                 {
                     possibleMoves[i] = -1;
                 }
-            }else if(color == "Light")
+            }else if(color == "Light" || color == "QLight")
             {
                 if(statusArray[possibleMoves[i]] != "Black")
                 {
@@ -128,6 +132,7 @@ public class BoardLogic {
 
     /**
      * Suranda visus galimus judėti langelius
+     * ** Pakoreguota funkcija, kad rodytu ir karalienės galimus ėjimus
      */
     int[] FindAllPossibleMoves(int placeId, String color)
     {
@@ -145,6 +150,16 @@ public class BoardLogic {
         {
             possibleMoves[0] = placeId - 9;
             possibleMoves[1] = placeId - 7;
+        }else if(color == "QBlack"){
+            possibleMoves[0] = placeId + 9;
+            possibleMoves[1] = placeId + 7;
+            possibleMoves[2] = placeId - 9;
+            possibleMoves[3] = placeId - 7;
+        }else if(color == "QLight"){
+            possibleMoves[0] = placeId - 9;
+            possibleMoves[1] = placeId - 7;
+            possibleMoves[2] = placeId + 9;
+            possibleMoves[3] = placeId + 7;
         }
 
         for(int i = 0; possibleMoves[i] != -1; i++)
@@ -230,6 +245,9 @@ public class BoardLogic {
 
     /**
      * Šaškės judėjimo funkcija.
+     * ** Pakoreguota funkcija, ėjimo metu tikrina ar figūrėlė gali tapti karaliene, jei taip
+     * ** figurėlė patampa karaliene(QLight/QBlack).
+     * ** Pridėtas karalienės judėjimas lentoje
      */
     public void MoveCheckerPiece(View V, Context C, int checkerId, int whereToId)
     {
@@ -237,31 +255,76 @@ public class BoardLogic {
         if(statusArray[checkerId] == "BlackPressed"){
 
             View destination = V.findViewById(checkerIDs[whereToId]);
-
-            destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
-
             View source = V.findViewById(checkerIDs[checkerId]);
 
-            source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
-
-            statusArray[whereToId] = "Black";
-
+            boolean queen = CanBeQueen(whereToId, "Black");
+            if(queen){
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
+                statusArray[whereToId] = "QBlack";
+            }else{
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
+                source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
+                statusArray[whereToId] = "Black";
+            }
         }else if(statusArray[checkerId] == "LightPressed")
         {
             View destination = V.findViewById(checkerIDs[whereToId]);
-
-            destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
-
+            View source = V.findViewById(checkerIDs[checkerId]);
+            boolean queen = CanBeQueen(whereToId, "Light");
+            if(queen){
+                Log.d("myTag", "to queen method\n");
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
+                statusArray[whereToId] = "QLight";
+            }
+            else{
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
+                source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
+                statusArray[whereToId] = "Light";
+            }
+        }else if(statusArray[checkerId] == "QBlackPressed"){
+            View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
 
+            destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
             source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
+            statusArray[whereToId] = "QBlack";
+        }else if(statusArray[checkerId] == "QLightPressed"){
+            View destination = V.findViewById(checkerIDs[whereToId]);
+            View source = V.findViewById(checkerIDs[checkerId]);
 
-            statusArray[whereToId] = "Light";
-
+            destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+            source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
+            statusArray[whereToId] = "QLight";
         }
 
     }
 
+    /**
+     * Tikrina ar šaškė gali tapti karaliene
+     */
+    public boolean CanBeQueen(int whereToId, String color)
+    {
+        if(color == "Black"){
+            for(int i = 56; i < 64; i++) {
+                if (checkerIDs[whereToId] == checkerIDs[i])
+                {
+                    Log.d("myTag", "IDS: " + whereToId + " " + checkerIDs[i]);
+                    return true;
+                }
+            }
+        }else if(color == "Light") {
+            for(int i = 0; i < 8; i++) {
+                if (checkerIDs[whereToId] == checkerIDs[i])
+                {
+                    Log.d("myTag", "IDS: " + whereToId + " " + checkerIDs[i]);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     /**
      * Outputina šaškių lentos visų šaškių statusus. Naudojama debuginimui
      */
@@ -271,6 +334,7 @@ public class BoardLogic {
         {
             Log.d("myTag", statusArray[(i*8)+0] + " " + statusArray[(i*8)+1] + " " + statusArray[(i*8)+2] + " " + statusArray[(i*8)+3] + " " + statusArray[(i*8)+4] + " " + statusArray[(i*8)+5] + " " + statusArray[(i*8)+6] + " " + statusArray[(i*8)+7] + '\n');
         }
+        Log.d("myTag", "new\n");
     }
 
     /**
@@ -299,6 +363,7 @@ public class BoardLogic {
 
     /**
      * Pagrindinė funkcija šaškių paspaudimų valdymui.
+     * ** Pakoreguota funkcija. Pridėta karlienės paspaudimo valdymas
      */
     public void CheckerClicked(View checkerView, Context C, View LayoutView, int placeId) {
 
@@ -326,6 +391,22 @@ public class BoardLogic {
 
                     HighlightPossibleMoves(LayoutView, C, placeId, "Light");
                     break;
+                case "QBlack": //karalienes paspaudimas
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_pressed));
+                    statusArray[placeId] = "QBlackPressed";
+                    pressedStatus = true;
+                    pressedId = placeId;
+
+                    HighlightPossibleMoves(LayoutView, C, placeId, "QBlack");
+                    break;
+                case "QLight": //karalienes paspaudimas
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece_pressed));
+                    statusArray[placeId] = "QLightPressed";
+                    pressedStatus = true;
+                    pressedId = placeId;
+
+                    HighlightPossibleMoves(LayoutView, C, placeId, "QLight");
+                    break;
             }
         }else{
             switch(statusArray[placeId]) {
@@ -344,6 +425,24 @@ public class BoardLogic {
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
 
                     statusArray[placeId] = "Light";
+                    pressedStatus = false;
+                    pressedId = -1;
+
+                    removeHighlightedMoves(LayoutView, C);
+                    break;
+                case "QLightPressed":
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+
+                    statusArray[placeId] = "QLight";
+                    pressedStatus = false;
+                    pressedId = -1;
+
+                    removeHighlightedMoves(LayoutView, C);
+                    break;
+                case "QBlackPressed":
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+
+                    statusArray[placeId] = "QBlack";
                     pressedStatus = false;
                     pressedId = -1;
 
@@ -380,7 +479,7 @@ public class BoardLogic {
                     }
                     break;
                 case "Light":
-                    Log.d("test", statusArray[pressedId]);
+                    //Log.d("test", statusArray[pressedId]);
                     if(statusArray[pressedId] == "BlackPressed")
                     {
 
