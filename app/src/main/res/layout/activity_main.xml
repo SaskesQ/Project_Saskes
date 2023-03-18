@@ -37,6 +37,20 @@
             app:icon="@android:drawable/ic_lock_silent_mode_off"
             app:iconTint="#000000" />
 
+        <Button
+            android:id="@+id/exit_app"
+            android:layout_width="80dp"
+            android:layout_height="55dp"
+            android:layout_weight="0"
+            android:onClick="exit_app"
+            android:translationX="170dp"
+            android:translationY="0dp"
+            app:backgroundTint="#A16E570A"
+
+            app:icon="@drawable/exit_app"
+            app:iconSize="50dp"
+            app:iconTint="#000000" />
+
     </LinearLayout>
 
     <LinearLayout

@@ -770,4 +770,31 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/switch_sides"
+        android:layout_width="78dp"
+        android:layout_height="71dp"
+        android:backgroundTint="#A16E570A"
+        android:insetLeft="0dp"
+        android:onClick="switch_sides"
+
+        android:scaleType="fitCenter"
+        app:icon="@drawable/switch_sides"
+        app:iconSize="40dp"
+        app:iconTint="#000000" />
+
+    <Button
+        android:id="@+id/exit1"
+        android:layout_width="78dp"
+        android:layout_height="71dp"
+        android:backgroundTint="#A16E570A"
+        android:duplicateParentState="false"
+        android:includeFontPadding="false"
+        android:onClick="escape1"
+        android:translationX="320dp"
+        app:icon="@drawable/exit"
+        app:iconSize="40dp"
+        app:iconTint="#000000" />
+        />
+
 </FrameLayout>
