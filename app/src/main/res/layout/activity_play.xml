@@ -8,6 +8,16 @@
     android:paddingTop="0dp">
 
 
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:rotation="180"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal|top"
+        android:text="" />
+
     <ImageView
         android:id="@+id/cboardImageView"
         android:layout_width="370dp"
@@ -769,5 +779,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="60dp"
+        android:text=""
+        android:textSize="30sp"/>
 
 </FrameLayout>

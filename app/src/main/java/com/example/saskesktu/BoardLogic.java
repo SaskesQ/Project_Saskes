@@ -5,8 +5,11 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
+
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
@@ -17,6 +20,12 @@ public class BoardLogic {
     int[] checkerIDs; //Visų šaškių ID. Naudojamas kartu su statusArray
     boolean pressedStatus; //1 - Šaškė paspausta; 0 - Šaškė nepaspausta
     int pressedId; //Paspaustos šaškės id.
+
+    int WhiteCaptured = 0; //Nukirstos baltos šaškės.
+
+    int BlackCaptured = 0; //Nukirstos juodos šaškės.
+
+
     public BoardLogic(){
         statusArray = new String[]{
                 "Black", "NA", "Black", "NA", "Black", "NA", "Black", "NA",
@@ -104,8 +113,6 @@ public class BoardLogic {
                     }
                 }
             }
-
-
         }
 
         for(int i = 0; i < 40; i++)
@@ -124,7 +131,6 @@ public class BoardLogic {
                     possibleMoves[i] = -1;
                 }
             }
-
         }
         return possibleMoves;
 
@@ -188,7 +194,6 @@ public class BoardLogic {
                     }
                 }
             }
-
         }
         return possibleMoves;
     }
@@ -217,13 +222,9 @@ public class BoardLogic {
 
                         statusArray[possibleMoves[i]] = "AvailableMove";
                     }
-
                 }
             }
-
         }
-
-
     }
 
     /**
@@ -348,10 +349,12 @@ public class BoardLogic {
         if(kirtimoColor == "Black")
         {
             destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
+            BlackCaptured++;
 
         }else if(kirtimoColor == "Light")
         {
             destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
+            WhiteCaptured++;
         }
         statusArray[destKirtimasId] = kirtimoColor;
 
@@ -474,7 +477,6 @@ public class BoardLogic {
                                     pressedId = -1;
                                 }
                             }
-
                         }
                     }
                     break;
