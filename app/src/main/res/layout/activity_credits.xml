@@ -135,7 +135,7 @@
             android:backgroundTint="#A16E570A"
             android:gravity="center|center_vertical"
             android:onClick="grįžimas"
-            android:text="Grįžti atgal"
+            android:text="Return"
             android:textSize="24sp" />
 
 

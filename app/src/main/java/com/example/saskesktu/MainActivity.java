@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void exit_app(View v){
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
+    }
+
     // Reaguoja į "Options" mygtuko paspaudimą, metodo pavadinimas sutampa su mygtuko argumentu "onClick"
     // Atidaro naują langą (naują "Activity")
     public void options(View v)
