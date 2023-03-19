@@ -12,15 +12,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class PlayActivity extends AppCompatActivity {
 
     BoardLogic boardLogic;
+    TextView BlackCapturedTextView;
+    TextView WhiteCapturedTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+        BlackCapturedTextView = findViewById(R.id.textView12);
+        WhiteCapturedTextView = findViewById(R.id.textView11);
 
         //Paslepiamas ActionBar'as
         ActionBar actionBar = getSupportActionBar();
@@ -44,6 +49,9 @@ public class PlayActivity extends AppCompatActivity {
         int placeId = Integer.parseInt(viewIDFull.substring(viewIDFull.lastIndexOf("/") + 2));
 
         boardLogic.CheckerClicked(V, PlayActivity.this, returnBoardView(), placeId);
+        BlackCapturedTextView.setText(String.valueOf(boardLogic.WhiteCaptured));
+        WhiteCapturedTextView.setText(String.valueOf(boardLogic.BlackCaptured));
+
 
 
     }
