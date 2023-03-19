@@ -298,7 +298,6 @@ public class BoardLogic {
             View source = V.findViewById(checkerIDs[checkerId]);
             boolean queen = CanBeQueen(whereToId, "Light");
             if(queen){
-                Log.d("myTag", "to queen method\n");
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QLight";
@@ -335,7 +334,6 @@ public class BoardLogic {
             for(int i = 56; i < 64; i++) {
                 if (checkerIDs[whereToId] == checkerIDs[i])
                 {
-                    Log.d("myTag", "IDS: " + whereToId + " " + checkerIDs[i]);
                     return true;
                 }
             }
@@ -343,7 +341,6 @@ public class BoardLogic {
             for(int i = 0; i < 8; i++) {
                 if (checkerIDs[whereToId] == checkerIDs[i])
                 {
-                    Log.d("myTag", "IDS: " + whereToId + " " + checkerIDs[i]);
                     return true;
                 }
             }
@@ -364,6 +361,7 @@ public class BoardLogic {
 
     /**
      * Kirtimo funkcija. Apkeičia šaškę su priešininko šaške
+     * ** Pakoreguota funkcija, kad po kirtimo šakė galėtų patapti karaliene, jei yra galima
      */
     public void Kirtimas(View V, Context C, int sourceKirtimasId, int nukirstaId, String kirtimoColor)
     {
@@ -381,15 +379,27 @@ public class BoardLogic {
 
         if(kirtimoColor == "Black")
         {
-            destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
-            BlackCaptured++;
+            if(CanBeQueen(destinationId, "Black")){
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                statusArray[destinationId] = "QBlack";
+            }else{
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
+                statusArray[destinationId] = kirtimoColor;
+                BlackCaptured++;
+            }
 
         }else if(kirtimoColor == "Light")
         {
-            destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
-            WhiteCaptured++;
+            if(CanBeQueen(destinationId, "Light")){
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                statusArray[destinationId] = "QLight";
+            }else{
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
+                statusArray[destinationId] = kirtimoColor;
+                WhiteCaptured++;
+            }
         }
-        statusArray[destinationId] = kirtimoColor;
+        //statusArray[destinationId] = kirtimoColor;
 
         source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
         statusArray[sourceKirtimasId] = "0";

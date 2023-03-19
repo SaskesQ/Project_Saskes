@@ -12,13 +12,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class PlayActivity extends AppCompatActivity {
 
     BoardLogic boardLogic;
-    TextView BlackCapturedTextView;
-    TextView WhiteCapturedTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +26,7 @@ public class PlayActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-
-
         boardLogic = new BoardLogic();
-        BlackCapturedTextView = findViewById(R.id.textView11);
-        WhiteCapturedTextView = findViewById(R.id.textView12);
     }
 
     public void escape1 (View V){
@@ -51,8 +44,6 @@ public class PlayActivity extends AppCompatActivity {
         int placeId = Integer.parseInt(viewIDFull.substring(viewIDFull.lastIndexOf("/") + 2));
 
         boardLogic.CheckerClicked(V, PlayActivity.this, returnBoardView(), placeId);
-        BlackCapturedTextView.setText(String.valueOf(boardLogic.BlackCaptured));
-        WhiteCapturedTextView.setText(String.valueOf(boardLogic.WhiteCaptured));
 
 
     }
