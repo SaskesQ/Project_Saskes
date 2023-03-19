@@ -377,25 +377,37 @@ public class BoardLogic {
         Log.d("nukirsta", Integer.toString(nukirstaId));
         Log.d("source", Integer.toString(destinationId));
 
-        if(kirtimoColor == "Black")
+        if(kirtimoColor == "Black" || kirtimoColor == "QBlack")
         {
             if(CanBeQueen(destinationId, "Black")){
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
                 statusArray[destinationId] = "QBlack";
+                BlackCaptured++;
             }else{
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
-                statusArray[destinationId] = kirtimoColor;
+                if(kirtimoColor == "QBlack"){
+                    destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                    statusArray[destinationId] = "QBlack";
+                }else {
+                    destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
+                    statusArray[destinationId] = kirtimoColor;
+                }
                 BlackCaptured++;
             }
 
-        }else if(kirtimoColor == "Light")
+        }else if(kirtimoColor == "Light" || kirtimoColor == "QLight")
         {
             if(CanBeQueen(destinationId, "Light")){
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
                 statusArray[destinationId] = "QLight";
+                WhiteCaptured++;
             }else{
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
-                statusArray[destinationId] = kirtimoColor;
+                if(kirtimoColor == "QLight"){
+                    destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                    statusArray[destinationId] = "QLight";
+                }else{
+                    destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
+                    statusArray[destinationId] = kirtimoColor;
+                }
                 WhiteCaptured++;
             }
         }
@@ -505,6 +517,7 @@ public class BoardLogic {
                     pressedId = -1;
 
                     break;
+                case "QBlack":
                 case "Black":
 
                     if(statusArray[pressedId] == "LightPressed")
@@ -525,8 +538,25 @@ public class BoardLogic {
                                 }
                             }
                         }
+                    }else if(statusArray[pressedId] == "QLightPressed"){
+                        int[] possibleMoves = FindAllPossibleKirtimai(pressedId, statusArray[pressedId]);
+                        for(int i = 0; i < 40; i++)
+                        {
+
+                            if(possibleMoves[i] != -1)
+                            {
+                                if(possibleMoves[i] == placeId)
+                                {
+                                    Kirtimas(LayoutView, C, pressedId, placeId, "QLight");
+                                    removeHighlightedMoves(LayoutView, C);
+                                    pressedStatus = false;
+                                    pressedId = -1;
+                                }
+                            }
+                        }
                     }
                     break;
+                case "QLight":
                 case "Light":
                     //Log.d("test", statusArray[pressedId]);
                     if(statusArray[pressedId] == "BlackPressed")
@@ -545,8 +575,23 @@ public class BoardLogic {
                                 }
                             }
                         }
+                    }else if(statusArray[pressedId] == "QBlackPressed"){
+                        int[] possibleMoves = FindAllPossibleKirtimai(pressedId, statusArray[pressedId]);
+
+                        for(int i = 0; i < 40; i++)
+                        {
+                            if(possibleMoves[i] != -1) {
+                                if (possibleMoves[i] == placeId) {
+                                    Kirtimas(LayoutView, C, pressedId, placeId, "QBlack");
+                                    removeHighlightedMoves(LayoutView, C);
+                                    pressedStatus = false;
+                                    pressedId = -1;
+                                }
+                            }
+                        }
                     }
                     break;
+
             }
         }
         DebugStatusArray();
