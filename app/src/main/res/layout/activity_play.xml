@@ -797,4 +797,28 @@
         android:onClick="pauseMenu"
         app:srcCompat="@android:drawable/ic_media_pause" />
 
+    <Button
+        android:id="@+id/switch_sides"
+        android:layout_width="80dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#6A440B"
+        android:onClick="switch_sides"
+        android:text="Button"
+        android:translationX="170dp"
+        app:icon="@drawable/switch_sides"
+        app:iconSize="47dp"
+        app:iconTint="#FFFFFF" />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="80dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#6A440B"
+        android:onClick="escape1"
+        android:text="Button"
+        android:translationX="325dp"
+        app:icon="@drawable/exit"
+        app:iconSize="50dp"
+        app:iconTint="#FFFFFF" />
+
 </FrameLayout>

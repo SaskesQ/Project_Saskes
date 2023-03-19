@@ -28,6 +28,8 @@ public class PlayActivity extends AppCompatActivity {
     TextView BlackCapturedTextView;
     TextView WhiteCapturedTextView;
 
+    boolean switch_status = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,8 @@ public class PlayActivity extends AppCompatActivity {
         //Paslepiamas ActionBar'as
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+
 
         boardLogic = new BoardLogic();
     }
@@ -51,12 +55,33 @@ public class PlayActivity extends AppCompatActivity {
     {
         return this.findViewById(android.R.id.content).getRootView();
     }
+
+    public void switch_sides(View V){
+
+
+        String viewIDFull = getResources().getResourceName(V.getId());
+        boardLogic.SwitchWasPressed(PlayActivity.this,returnBoardView());
+        if (!switch_status){
+            switch_status=true;
+        }
+        else
+            switch_status=false;
+
+
+    }
+
+
+
     public void onCheckerClick(View V){
 
         String viewIDFull = getResources().getResourceName(V.getId());
         int placeId = Integer.parseInt(viewIDFull.substring(viewIDFull.lastIndexOf("/") + 2));
 
-        boardLogic.CheckerClicked(V, PlayActivity.this, returnBoardView(), placeId);
+        if(!switch_status)
+            boardLogic.CheckerClicked(V, PlayActivity.this, returnBoardView(), placeId);
+        else
+            boardLogic.CheckerClicked2(V, PlayActivity.this, returnBoardView(), placeId);
+
         BlackCapturedTextView.setText(String.valueOf(boardLogic.WhiteCaptured));
         WhiteCapturedTextView.setText(String.valueOf(boardLogic.BlackCaptured));
     }
