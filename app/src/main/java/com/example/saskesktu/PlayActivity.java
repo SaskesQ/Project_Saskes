@@ -12,13 +12,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
 import android.widget.ImageButton;
-
+import android.widget.TextView;
 
 public class PlayActivity extends AppCompatActivity {
 
-    boolean switch_status = false; // jeigu 0, tai naudoja viena logika, jeigu 1, tai kita
     BoardLogic boardLogic;
-
+    TextView BlackCapturedTextView;
+    TextView WhiteCapturedTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,11 @@ public class PlayActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+
+
         boardLogic = new BoardLogic();
+        BlackCapturedTextView = findViewById(R.id.textView11);
+        WhiteCapturedTextView = findViewById(R.id.textView12);
     }
 
     public void escape1 (View V){
@@ -41,30 +45,15 @@ public class PlayActivity extends AppCompatActivity {
     {
         return this.findViewById(android.R.id.content).getRootView();
     }
-
-    public void switch_sides(View V){
-
-
-        String viewIDFull = getResources().getResourceName(V.getId());
-        boardLogic.SwitchWasPressed(PlayActivity.this,returnBoardView());
-        if (!switch_status){
-            switch_status=true;
-        }
-        else
-            switch_status=false;
-    }
-
-
-
     public void onCheckerClick(View V){
-
 
         String viewIDFull = getResources().getResourceName(V.getId());
         int placeId = Integer.parseInt(viewIDFull.substring(viewIDFull.lastIndexOf("/") + 2));
-        if(!switch_status)
-            boardLogic.CheckerClicked(V, PlayActivity.this, returnBoardView(), placeId);
-        else
-            boardLogic.CheckerClicked2(V, PlayActivity.this, returnBoardView(), placeId);
+
+        boardLogic.CheckerClicked(V, PlayActivity.this, returnBoardView(), placeId);
+        BlackCapturedTextView.setText(String.valueOf(boardLogic.BlackCaptured));
+        WhiteCapturedTextView.setText(String.valueOf(boardLogic.WhiteCaptured));
+
 
     }
 
