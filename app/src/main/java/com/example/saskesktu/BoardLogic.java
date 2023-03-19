@@ -109,7 +109,7 @@ public class BoardLogic {
             {
                 if((possibleMoves[i]) / 8 != checkerRow + 1){
                     if((possibleMoves[i]) / 8 != checkerRow - 1) {
-                        possibleMoves[i] = -1;
+                            possibleMoves[i] = -1;
                     }
                 }
             }
@@ -132,6 +132,30 @@ public class BoardLogic {
                 }
             }
         }
+
+        for(int i = 0; i < 40; i++) {
+            if (possibleMoves[i] + (possibleMoves[i] - placeId) < 0 || possibleMoves[i] + (possibleMoves[i] - placeId) > 63) {
+                possibleMoves[i] = -1;
+            }
+        }
+
+        for(int i = 0; i < 40; i++)
+        {
+            if(possibleMoves[i] != -1)
+            {
+
+                if(statusArray[possibleMoves[i] + (possibleMoves[i] - placeId)] != "0")
+                {
+                    possibleMoves[i] = -1;
+                }
+
+            }
+
+
+        }
+
+
+
         return possibleMoves;
 
     }
@@ -335,16 +359,25 @@ public class BoardLogic {
         {
             Log.d("myTag", statusArray[(i*8)+0] + " " + statusArray[(i*8)+1] + " " + statusArray[(i*8)+2] + " " + statusArray[(i*8)+3] + " " + statusArray[(i*8)+4] + " " + statusArray[(i*8)+5] + " " + statusArray[(i*8)+6] + " " + statusArray[(i*8)+7] + '\n');
         }
-        Log.d("myTag", "new\n");
+
     }
 
     /**
      * Kirtimo funkcija. Apkeičia šaškę su priešininko šaške
      */
-    public void Kirtimas(View V, Context C, int sourceKirtimasId, int destKirtimasId, String kirtimoColor)
+    public void Kirtimas(View V, Context C, int sourceKirtimasId, int nukirstaId, String kirtimoColor)
     {
-        View destination = V.findViewById(checkerIDs[destKirtimasId]);
+
+        View nukirsta = V.findViewById(checkerIDs[nukirstaId]);
+
         View source = V.findViewById(checkerIDs[sourceKirtimasId]);
+
+        int destinationId = nukirstaId + (nukirstaId - sourceKirtimasId);
+        View destination = V.findViewById(checkerIDs[destinationId]);
+
+        Log.d("destination", Integer.toString(sourceKirtimasId));
+        Log.d("nukirsta", Integer.toString(nukirstaId));
+        Log.d("source", Integer.toString(destinationId));
 
         if(kirtimoColor == "Black")
         {
@@ -356,11 +389,14 @@ public class BoardLogic {
             destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
             WhiteCaptured++;
         }
-        statusArray[destKirtimasId] = kirtimoColor;
+        statusArray[destinationId] = kirtimoColor;
 
         source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
-
         statusArray[sourceKirtimasId] = "0";
+
+        nukirsta.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
+        statusArray[nukirstaId] = "0";
+
 
     }
 
@@ -467,6 +503,7 @@ public class BoardLogic {
                         int[] possibleMoves = FindAllPossibleKirtimai(pressedId, statusArray[pressedId]);
                         for(int i = 0; i < 40; i++)
                         {
+
                             if(possibleMoves[i] != -1)
                             {
                                 if(possibleMoves[i] == placeId)
