@@ -127,10 +127,17 @@ public class PlayActivity extends AppCompatActivity {
         dialog.show();
     }
     public void SurrenderWhite(View V){
+        if (switch_status == false)
         gameOver(V, "Black");
+        else
+            gameOver(V, "White");
+
     }
 
     public void SurrenderBlack(View V){
+        if (switch_status == false)
         gameOver(V, "White");
+        else
+            gameOver(V, "Black");
     }
 }
