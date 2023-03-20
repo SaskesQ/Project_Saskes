@@ -2,9 +2,11 @@ package com.example.saskesktu;
 
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -66,8 +68,6 @@ public class PlayActivity extends AppCompatActivity {
         }
         else
             switch_status=false;
-
-
     }
 
 
@@ -82,8 +82,16 @@ public class PlayActivity extends AppCompatActivity {
         else
             boardLogic.CheckerClicked2(V, PlayActivity.this, returnBoardView(), placeId);
 
-        BlackCapturedTextView.setText(String.valueOf(boardLogic.WhiteCaptured));
-        WhiteCapturedTextView.setText(String.valueOf(boardLogic.BlackCaptured));
+        if(boardLogic.WhiteCaptured < 12 && boardLogic.BlackCaptured < 12)
+        {
+            BlackCapturedTextView.setText(String.valueOf(boardLogic.WhiteCaptured));
+            WhiteCapturedTextView.setText(String.valueOf(boardLogic.BlackCaptured));
+        } else if (boardLogic.WhiteCaptured == 12) {
+            gameOver(V, "White");
+        } else if (boardLogic.BlackCaptured == 12) {
+            gameOver(V, "Black");
+        }
+
     }
     public void pauseMenu(View V){
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -98,5 +106,31 @@ public class PlayActivity extends AppCompatActivity {
                 pauseMenu.dismiss();
             }
         });
+    }
+    public void gameOver(View V, String winner) {
+        // Create a new AlertDialog builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Set the message and title of the popup window
+        builder.setMessage("The winner is " + winner + "!")
+                .setTitle("Game Over");
+
+        // Add a button to the popup window
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                escape1(V);
+            }
+        });
+
+        // Create and show the popup window
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void SurrenderWhite(View V){
+        gameOver(V, "Black");
+    }
+
+    public void SurrenderBlack(View V){
+        gameOver(V, "White");
     }
 }
