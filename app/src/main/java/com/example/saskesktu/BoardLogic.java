@@ -962,7 +962,7 @@ public class BoardLogic {
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
 
-            boolean queen = CanBeQueen(whereToId, "Light");
+            boolean queen = CanBeQueen2(whereToId, "Light");
             if(queen){
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
@@ -976,7 +976,7 @@ public class BoardLogic {
         {
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
-            boolean queen = CanBeQueen(whereToId, "Black");
+            boolean queen = CanBeQueen2(whereToId, "Black");
             if(queen){
                 Log.d("myTag", "to queen method\n");
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
@@ -1025,17 +1025,41 @@ public class BoardLogic {
         Log.d("nukirsta", Integer.toString(nukirstaId));
         Log.d("source", Integer.toString(destinationId));
 
-        if(kirtimoColor == "Light")
+        if(kirtimoColor == "Light" || kirtimoColor == "QLight")
         {
-            destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
-            BlackCaptured++;
+            if(CanBeQueen(destinationId, "Light")){
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                statusArray[destinationId] = "Light";
+                BlackCaptured++;
+            }else{
+                if(kirtimoColor == "QLight"){
+                    destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                    statusArray[destinationId] = "QLight";
+                }else {
+                    destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
+                    statusArray[destinationId] = kirtimoColor;
+                }
+                BlackCaptured++;
+            }
 
-        }else if(kirtimoColor == "Black")
+        }else if(kirtimoColor == "Black" || kirtimoColor == "QBlack")
         {
-            destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
-            WhiteCaptured++;
+            if(CanBeQueen(destinationId, "Black")){
+                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                statusArray[destinationId] = "QBlack";
+                WhiteCaptured++;
+            }else{
+                if(kirtimoColor == "QBlack"){
+                    destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                    statusArray[destinationId] = "QBlack";
+                }else{
+                    destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
+                    statusArray[destinationId] = kirtimoColor;
+                }
+                WhiteCaptured++;
+            }
         }
-        statusArray[destinationId] = kirtimoColor;
+       // statusArray[destinationId] = kirtimoColor;
 
         source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
         statusArray[sourceKirtimasId] = "0";
@@ -1204,7 +1228,7 @@ public class BoardLogic {
 
                 if(IsPlaceFree(possibleMoves[i], color))
                 {
-                    if(IsEnemyChecker(possibleMoves[i], color))
+                    if(IsEnemyChecker2(possibleMoves[i], color))
                     {
 
                     }else{
@@ -1217,6 +1241,29 @@ public class BoardLogic {
                 }
             }
         }
+    }
+
+    /**
+     * Tikrina ar šaškė gali tapti karaliene
+     */
+    public boolean CanBeQueen2(int whereToId, String color)
+    {
+        if(color == "Light"){
+            for(int i = 56; i < 64; i++) {
+                if (checkerIDs[whereToId] == checkerIDs[i])
+                {
+                    return true;
+                }
+            }
+        }else if(color == "Black") {
+            for(int i = 0; i < 8; i++) {
+                if (checkerIDs[whereToId] == checkerIDs[i])
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
