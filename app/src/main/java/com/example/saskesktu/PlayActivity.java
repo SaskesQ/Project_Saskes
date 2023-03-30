@@ -4,20 +4,15 @@ package com.example.saskesktu;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -104,6 +99,22 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 pauseMenu.dismiss();
+            }
+        });
+        ImageButton home = (ImageButton) pauseView.findViewById(R.id.homeButton);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PlayActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageButton restart = (ImageButton) pauseView.findViewById(R.id.restartButton);
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(PlayActivity.this, PlayActivity.class);
+                startActivity(intent);
             }
         });
     }
