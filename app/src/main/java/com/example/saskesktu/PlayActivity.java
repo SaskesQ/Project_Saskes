@@ -1,15 +1,21 @@
 package com.example.saskesktu;
 
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +32,15 @@ public class PlayActivity extends AppCompatActivity {
     TextView WhiteCapturedTextView;
 
     boolean switch_status = false;
-
+    OptionsActivity boardOption = new OptionsActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+
+        //Iskvieciamas metodas, parenkantis atitinkama lentos modeli
+        boardBackgroundV();
+
         BlackCapturedTextView = findViewById(R.id.textView12);
         WhiteCapturedTextView = findViewById(R.id.textView11);
 
@@ -38,11 +48,20 @@ public class PlayActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-
-
         boardLogic = new BoardLogic();
     }
-
+    public void boardBackgroundV(){
+        SharedPreferences pref = getSharedPreferences("BG_VAL", MODE_PRIVATE);
+        int bg_val = pref.getInt("BG_VAL", 1);
+        View board = findViewById(R.id.cboardImageView);
+        switch (bg_val) {
+            case 2:
+                board.setBackgroundResource(R.drawable.checkers_board_background_v2);
+                break;
+            default:
+                board.setBackgroundResource(R.drawable.checkers_board_background);
+        }
+    }
     public void escape1 (View V){
 
         Intent intent = new Intent(this, MainActivity.class);
@@ -64,9 +83,6 @@ public class PlayActivity extends AppCompatActivity {
         else
             switch_status=false;
     }
-
-
-
     public void onCheckerClick(View V){
 
         String viewIDFull = getResources().getResourceName(V.getId());

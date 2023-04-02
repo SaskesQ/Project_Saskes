@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/board_background"
-    android:paddingTop="0dp">
+    android:paddingTop="0dp"
+    android:id="@+id/playLayout">
+
 
 
     <TextView
@@ -22,8 +24,7 @@
         android:id="@+id/cboardImageView"
         android:layout_width="370dp"
         android:layout_height="370dp"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/checkers_board_background" />
+        android:layout_gravity="center" />
 
 
     <LinearLayout
