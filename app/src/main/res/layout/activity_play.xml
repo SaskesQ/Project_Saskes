@@ -830,7 +830,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="#6A440B"
-        android:onClick="SurrenderWhite"
+        android:onClick="surrenderAysWhite"
         app:icon="@drawable/flag"
         app:iconSize="47dp"
         app:iconTint="#FFFFFF" />
@@ -843,7 +843,7 @@
         android:layout_marginTop="90dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="#6A440B"
-        android:onClick="SurrenderBlack"
+        android:onClick="surrenderAysBlack"
         app:icon="@drawable/flag"
         app:iconSize="47dp"
         app:iconTint="#FFFFFF" />

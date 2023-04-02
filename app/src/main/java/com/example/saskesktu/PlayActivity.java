@@ -134,22 +134,57 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
     }
+    public void surrenderAysWhite(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to surrender ?").setTitle("Surrender");
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                SurrenderWhite(v);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void surrenderAysBlack(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to surrender ?").setTitle("Surrender");
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                SurrenderBlack(v);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
     public void gameOver(View V, String winner) {
-        // Create a new AlertDialog builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        // Set the message and title of the popup window
         builder.setMessage("The winner is " + winner + "!")
                 .setTitle("Game Over");
 
-        // Add a button to the popup window
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 escape1(V);
             }
         });
 
-        // Create and show the popup window
         AlertDialog dialog = builder.create();
         dialog.show();
     }
