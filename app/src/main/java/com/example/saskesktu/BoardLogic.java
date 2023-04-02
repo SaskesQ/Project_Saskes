@@ -1,21 +1,22 @@
 package com.example.saskesktu;
 
-import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
-
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import org.w3c.dom.Text;
-
 import java.util.Arrays;
 
-import kotlin.collections.IntIterator;
-
-public class BoardLogic {
+public class BoardLogic extends PlayActivity {
     String[] statusArray; //Visų šaškių statusai
     int[] checkerIDs; //Visų šaškių ID. Naudojamas kartu su statusArray
     boolean pressedStatus; //1 - Šaškė paspausta; 0 - Šaškė nepaspausta
@@ -26,6 +27,7 @@ public class BoardLogic {
     int BlackCaptured = 0; //Nukirstos juodos šaškės.
 
     int move_count = 0;
+
     public BoardLogic(){
         statusArray = new String[]{
                 "Black", "NA", "Black", "NA", "Black", "NA", "Black", "NA",
@@ -474,9 +476,10 @@ public class BoardLogic {
 
             boolean queen = CanBeQueen(whereToId, "Black");
             if(queen){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                queenAnimation(destination, "Black");
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QBlack";
+
             }else{
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
@@ -488,9 +491,12 @@ public class BoardLogic {
             View source = V.findViewById(checkerIDs[checkerId]);
             boolean queen = CanBeQueen(whereToId, "Light");
             if(queen){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+
+                queenAnimation(destination, "Light");
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QLight";
+
+
             }
             else{
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
@@ -570,7 +576,7 @@ public class BoardLogic {
         if(kirtimoColor == "Black" || kirtimoColor == "QBlack")
         {
             if(CanBeQueen(destinationId, "Black")){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                queenAnimation(destination, "Black");
                 statusArray[destinationId] = "QBlack";
                 BlackCaptured++;
             }else{
@@ -587,7 +593,7 @@ public class BoardLogic {
         }else if(kirtimoColor == "Light" || kirtimoColor == "QLight")
         {
             if(CanBeQueen(destinationId, "Light")){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                queenAnimation(destination, "Light");
                 statusArray[destinationId] = "QLight";
                 WhiteCaptured++;
             }else{
@@ -601,7 +607,6 @@ public class BoardLogic {
                 WhiteCaptured++;
             }
         }
-        //statusArray[destinationId] = kirtimoColor;
 
         source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
         statusArray[sourceKirtimasId] = "0";
@@ -964,9 +969,10 @@ public class BoardLogic {
 
             boolean queen = CanBeQueen2(whereToId, "Light");
             if(queen){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                queenAnimation(destination, "Light");
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QLight";
+
             }else{
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
@@ -978,8 +984,7 @@ public class BoardLogic {
             View source = V.findViewById(checkerIDs[checkerId]);
             boolean queen = CanBeQueen2(whereToId, "Black");
             if(queen){
-                Log.d("myTag", "to queen method\n");
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                queenAnimation(destination, "Black");
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QBlack";
             }
@@ -1028,8 +1033,8 @@ public class BoardLogic {
         if(kirtimoColor == "Light" || kirtimoColor == "QLight")
         {
             if(CanBeQueen(destinationId, "Light")){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
-                statusArray[destinationId] = "Light";
+                queenAnimation(destination, "Light");
+                statusArray[destinationId] = "QLight";
                 BlackCaptured++;
             }else{
                 if(kirtimoColor == "QLight"){
@@ -1045,7 +1050,7 @@ public class BoardLogic {
         }else if(kirtimoColor == "Black" || kirtimoColor == "QBlack")
         {
             if(CanBeQueen(destinationId, "Black")){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                queenAnimation(destination, "Black");
                 statusArray[destinationId] = "QBlack";
                 WhiteCaptured++;
             }else{
@@ -1069,11 +1074,6 @@ public class BoardLogic {
 
 
     }
-
-
-
-
-
     public void CheckerClicked2(View checkerView, Context C, View LayoutView, int placeId) {
 
         if(!pressedStatus)
@@ -1266,8 +1266,25 @@ public class BoardLogic {
         return false;
     }
 
+    //Animacijos, kai figurele pavirsta karaliene metodas
+    public void queenAnimation(View destination, String colour){
+        ImageView img = (ImageView) destination;
+        img.setBackgroundResource(R.drawable.queen_animation);
+        AnimationDrawable animation = (AnimationDrawable) img.getBackground();
 
-
-
-
+        new CountDownTimer(750, 10) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                animation.start();
+            }
+            @Override
+            public void onFinish() {
+                animation.stop();
+                if(colour == "Light")
+                    destination.setBackgroundResource(R.drawable.light_king_piece);
+                else
+                    destination.setBackgroundResource(R.drawable.dark_king_piece);
+            }
+        }.start();
+    }
 }

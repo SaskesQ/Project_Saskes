@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +88,7 @@ public class PlayActivity extends AppCompatActivity {
         }
 
     }
-    public void pauseMenu(View V){
+    public void pauseMenu(View V) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View pauseView = inflater.inflate(R.layout.pause_menu, null);
         final PopupWindow pauseMenu = new PopupWindow(pauseView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
@@ -113,7 +113,7 @@ public class PlayActivity extends AppCompatActivity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(PlayActivity.this, PlayActivity.class);
+                Intent intent = new Intent(PlayActivity.this, PlayActivity.class);
                 startActivity(intent);
             }
         });
