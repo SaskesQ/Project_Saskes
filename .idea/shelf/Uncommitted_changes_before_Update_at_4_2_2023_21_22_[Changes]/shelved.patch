@@ -1,0 +1,60 @@
+Index: app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+===================================================================
+diff --git a/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml b/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+deleted file mode 100644
+--- a/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml	(revision 7b9815109355385f805890604efef1ede2839ea9)
++++ /dev/null	(revision 7b9815109355385f805890604efef1ede2839ea9)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@drawable/ic_launcher_background" />
+-    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+-</adaptive-icon>
+\ No newline at end of file
+Index: app/src/main/res/layout/pause_menu.xml
+===================================================================
+diff --git a/app/src/main/res/layout/pause_menu.xml b/app/src/main/res/layout/pause_menu.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/pause_menu.xml	(revision 7b9815109355385f805890604efef1ede2839ea9)
++++ /dev/null	(revision 7b9815109355385f805890604efef1ede2839ea9)
+@@ -1,40 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:background="#97554F4F"
+-    android:backgroundTint="#97554F4F">
+-
+-    <TextView
+-        android:id="@+id/paused"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_marginTop="161dp"
+-        android:layout_marginBottom="551dp"
+-        android:lineSpacingExtra="8sp"
+-        android:text="PAUSED"
+-        android:textColor="#191818"
+-        android:textSize="60dp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
+-
+-    <Button
+-        android:id="@+id/resume"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_marginStart="147dp"
+-        android:layout_marginTop="32dp"
+-        android:layout_marginEnd="170dp"
+-        android:layout_marginBottom="440dp"
+-        android:backgroundTint="#504730"
+-        android:onClick="pauseMenu"
+-        android:text="Resume"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/paused" />
+-</androidx.constraintlayout.widget.ConstraintLayout>

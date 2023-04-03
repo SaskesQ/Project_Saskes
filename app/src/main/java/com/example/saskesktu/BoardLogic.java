@@ -1,25 +1,22 @@
 package com.example.saskesktu;
 
-import android.app.Activity;
 import android.content.Context;
-import android.text.Layout;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
-
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import org.w3c.dom.Text;
-
 import java.util.Arrays;
 
-import kotlin.collections.IntIterator;
-
-public class BoardLogic {
-
-    View Player1TextView;
-    View Player2TextView;
+public class BoardLogic extends PlayActivity {
     String[] statusArray; //Visų šaškių statusai
     int[] checkerIDs; //Visų šaškių ID. Naudojamas kartu su statusArray
     boolean pressedStatus; //1 - Šaškė paspausta; 0 - Šaškė nepaspausta
@@ -30,10 +27,11 @@ public class BoardLogic {
     int BlackCaptured = 0; //Nukirstos juodos šaškės.
 
     int move_count = 0;
+
     public BoardLogic(){
         statusArray = new String[]{
-                "Black", "NA", "Black", "NA", "Black", "NA", "Black", "NA",
-                "NA", "Black", "NA", "Black", "NA", "Black", "NA", "Black",
+                "Black", "NA", "0", "NA", "Black", "NA", "Black", "NA",
+                "NA", "Light", "NA", "0", "NA", "Black", "NA", "Black",
                 "Black", "NA", "Black", "NA", "Black", "NA", "Black", "NA",
                 "NA", "0", "NA", "0", "NA", "0", "NA", "0",
                 "0", "NA", "0", "NA", "0", "NA", "0", "NA",
@@ -54,8 +52,6 @@ public class BoardLogic {
 
         pressedStatus = false;
         pressedId = -1;
-
-
     }
 
     /**
@@ -244,7 +240,6 @@ public class BoardLogic {
         }
 
 
-        DebugStatusArray();
 
 
     }
@@ -313,7 +308,6 @@ public class BoardLogic {
 
         for(int i = 0; i < 40; i++)
         {
-            Log.d("t", Integer.toString(possibleMoves[i]));
             if(color == "Black" || color == "QBlack")
             {
                 if(statusArray[possibleMoves[i]] != "Light")
@@ -349,11 +343,151 @@ public class BoardLogic {
 
 
         }
+        return possibleMoves;
 
+    }
+    int[] FindAllPossibleKirtimaiQueen(int placeId, String color) {
+        int[] possibleMoves = new int[40];
+        Arrays.fill(possibleMoves, -1);
+
+        int[] galimiKirtimai = new int[40];
+        Arrays.fill(galimiKirtimai, -1);
+        int KirtimaiIndex = 0;
+
+        int checkerRow = (placeId) / 8;
+
+        possibleMoves = ConstructQueenPath(placeId);
+
+        for(int i = 0; i < 40; i++)
+        {
+            if(possibleMoves[i] > 63)
+            {
+                possibleMoves[i] = -1;
+            }else if(possibleMoves[i] < 0)
+            {
+                possibleMoves[i] = -1;
+            }
+        }
+        for(int i = 0; i < 40; i++)
+        {
+            int kuriKryptis = i / 10;
+            int kurisJudesys = i % 10;
+            if(possibleMoves[i] != -1)
+            {
+                if(statusArray[possibleMoves[i]] != "0")
+                {
+                    galimiKirtimai[KirtimaiIndex] = possibleMoves[i];
+                    KirtimaiIndex++;
+                }
+            }
+
+        }
+        //Ar kraštinės šaškės
+        for(int i = 0; i < 40; i++)
+        {
+
+            if(galimiKirtimai[i] / 8 == 0 || galimiKirtimai[i] / 8 == 7)
+            {
+                galimiKirtimai[i] = -1;
+            }
+            if(galimiKirtimai[i] % 8 == 0 || galimiKirtimai[i] % 8 == 7)
+            {
+                galimiKirtimai[i] = -1;
+            }
+
+        }
+        for(int i = 0; i < 40; i++){
+        if(galimiKirtimai[i] - placeId > 0)
+        {
+            if((galimiKirtimai[i] - placeId) % 9 == 0)
+            {
+                if(statusArray[galimiKirtimai[i] + 9] != "0")
+                {
+                    galimiKirtimai[i] = -1;
+                }
+            }else if((galimiKirtimai[i] - placeId) % 7 == 0) {
+                if(statusArray[galimiKirtimai[i] + 7] != "0")
+                {
+                    galimiKirtimai[i] = -1;
+                }
+            }
+        }else{
+            if((galimiKirtimai[i] - placeId) % 9 == 0)
+            {
+                if(statusArray[galimiKirtimai[i] - 9] != "0")
+                {
+                    galimiKirtimai[i] = -1;
+                }
+            }else if((galimiKirtimai[i] - placeId) % 7 == 0) {
+                if(statusArray[galimiKirtimai[i] - 7] != "0")
+                {
+                    galimiKirtimai[i] = -1;
+                }
+            }
+        }
+
+        }
+        return galimiKirtimai;
+
+    }
+    int[] ConstructQueenPath(int placeId)
+    {
+        int[] possibleMoves = new int[40];
+        int checkerRow = (placeId) / 8;
+
+        int add = 9;
+        for(int i = 0; i < 10; i++)
+        {
+
+            possibleMoves[i] = placeId + add;
+            add += 9;
+
+            if(checkerRow + i + 1 != (possibleMoves[i] / 8))
+            {
+                possibleMoves[i] = -1;
+            }
+        }
+
+        add = 7;
+        for(int i = 10; i < 20; i++)
+        {
+
+            possibleMoves[i] = placeId + add;
+            add += 7;
+
+            if(checkerRow + (i - 10) + 1 != (possibleMoves[i] / 8))
+            {
+                possibleMoves[i] = -1;
+            }
+        }
+        add = 9;
+        for(int i = 20; i < 30; i++)
+        {
+
+            possibleMoves[i] = placeId - add;
+            add += 9;
+
+            if(checkerRow - (i - 20) - 1 != (possibleMoves[i] / 8))
+            {
+                possibleMoves[i] = -1;
+            }
+        }
+
+        add = 7;
+        for(int i = 30; i < 40; i++)
+        {
+
+            possibleMoves[i] = placeId - add;
+            add += 7;
+
+            if(checkerRow - (i - 30) - 1 != (possibleMoves[i] / 8))
+            {
+                possibleMoves[i] = -1;
+            }
+        }
 
 
         return possibleMoves;
-
     }
 
     /**
@@ -377,18 +511,13 @@ public class BoardLogic {
             possibleMoves[0] = placeId - 9;
             possibleMoves[1] = placeId - 7;
         }else if(color == "QBlack"){
-            possibleMoves[0] = placeId + 9;
-            possibleMoves[1] = placeId + 7;
-            possibleMoves[2] = placeId - 9;
-            possibleMoves[3] = placeId - 7;
+            possibleMoves = ConstructQueenPath(placeId);
+
         }else if(color == "QLight"){
-            possibleMoves[0] = placeId - 9;
-            possibleMoves[1] = placeId - 7;
-            possibleMoves[2] = placeId + 9;
-            possibleMoves[3] = placeId + 7;
+            possibleMoves = ConstructQueenPath(placeId);
         }
 
-        for(int i = 0; possibleMoves[i] != -1; i++)
+        for(int i = 0; i < 40; i++)
         {
             if(possibleMoves[i] > 63)
             {
@@ -413,6 +542,26 @@ public class BoardLogic {
                         possibleMoves[i] = -1;
                     }
                 }
+            }
+        }
+
+        if(color == "QBlack" || color == "QLight")
+        {
+            for(int i = 0; i < 40; i++)
+            {
+                int kuriKryptis = i / 10;
+                int kurisJudesys = i % 10;
+                if(possibleMoves[i] != -1)
+                {
+                    if(statusArray[possibleMoves[i]] != "0")
+                    {
+                        for(int j = ((kuriKryptis*10) + kurisJudesys); j < (kuriKryptis + 1) * 10; j++)
+                        {
+                            possibleMoves[j] = -1;
+                        }
+                    }
+                }
+
             }
         }
         return possibleMoves;
@@ -480,9 +629,10 @@ public class BoardLogic {
 
             boolean queen = CanBeQueen(whereToId, "Black");
             if(queen){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                queenAnimation(destination, "Black");
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QBlack";
+
             }else{
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
@@ -494,9 +644,12 @@ public class BoardLogic {
             View source = V.findViewById(checkerIDs[checkerId]);
             boolean queen = CanBeQueen(whereToId, "Light");
             if(queen){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+
+                queenAnimation(destination, "Light");
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QLight";
+
+
             }
             else{
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
@@ -565,8 +718,32 @@ public class BoardLogic {
         View nukirsta = V.findViewById(checkerIDs[nukirstaId]);
 
         View source = V.findViewById(checkerIDs[sourceKirtimasId]);
+        int destinationId = 0;
+        if(nukirstaId - sourceKirtimasId == 9 || nukirstaId - sourceKirtimasId == 7 ||
+                nukirstaId - sourceKirtimasId == -9 || nukirstaId - sourceKirtimasId == -7)
+        {
+            destinationId = nukirstaId + (nukirstaId - sourceKirtimasId);
+        }else{
+            if(nukirstaId - sourceKirtimasId > 0)
+            {
+                if((nukirstaId - sourceKirtimasId) % 9 == 0)
+                {
+                    destinationId = nukirstaId + 9;
+                }else if((nukirstaId - sourceKirtimasId) % 7 == 0) {
+                    destinationId = nukirstaId + 7;
+                }
+            }else{
+                if((nukirstaId - sourceKirtimasId) % 9 == 0)
+                {
+                    destinationId = nukirstaId - 9;
+                }else if((nukirstaId - sourceKirtimasId) % 7 == 0) {
+                    destinationId = nukirstaId - 7;
+                }
+            }
 
-        int destinationId = nukirstaId + (nukirstaId - sourceKirtimasId);
+
+        }
+
         View destination = V.findViewById(checkerIDs[destinationId]);
 
         Log.d("destination", Integer.toString(sourceKirtimasId));
@@ -576,7 +753,7 @@ public class BoardLogic {
         if(kirtimoColor == "Black" || kirtimoColor == "QBlack")
         {
             if(CanBeQueen(destinationId, "Black")){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                queenAnimation(destination, "Black");
                 statusArray[destinationId] = "QBlack";
                 BlackCaptured++;
             }else{
@@ -593,7 +770,7 @@ public class BoardLogic {
         }else if(kirtimoColor == "Light" || kirtimoColor == "QLight")
         {
             if(CanBeQueen(destinationId, "Light")){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                queenAnimation(destination, "Light");
                 statusArray[destinationId] = "QLight";
                 WhiteCaptured++;
             }else{
@@ -607,7 +784,6 @@ public class BoardLogic {
                 WhiteCaptured++;
             }
         }
-        //statusArray[destinationId] = kirtimoColor;
 
         source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
         statusArray[sourceKirtimasId] = "0";
@@ -739,10 +915,10 @@ public class BoardLogic {
                             }
                         }
                     }else if(statusArray[pressedId] == "QLightPressed"){
-                        int[] possibleMoves = FindAllPossibleKirtimai(pressedId, statusArray[pressedId]);
+                        int[] possibleMoves = FindAllPossibleKirtimaiQueen(pressedId, statusArray[pressedId]);
                         for(int i = 0; i < 40; i++)
                         {
-
+                            Log.d("test", Integer.toString(possibleMoves[i]));
                             if(possibleMoves[i] != -1)
                             {
                                 if(possibleMoves[i] == placeId)
@@ -776,10 +952,12 @@ public class BoardLogic {
                             }
                         }
                     }else if(statusArray[pressedId] == "QBlackPressed"){
-                        int[] possibleMoves = FindAllPossibleKirtimai(pressedId, statusArray[pressedId]);
+                        int[] possibleMoves = FindAllPossibleKirtimaiQueen(pressedId, statusArray[pressedId]);
 
                         for(int i = 0; i < 40; i++)
                         {
+                            Log.d("test", Integer.toString(possibleMoves[i]));
+
                             if(possibleMoves[i] != -1) {
                                 if (possibleMoves[i] == placeId) {
                                     Kirtimas(LayoutView, C, pressedId, placeId, "QBlack");
@@ -794,7 +972,6 @@ public class BoardLogic {
 
             }
         }
-        DebugStatusArray();
     }
 
 
@@ -912,20 +1089,16 @@ public class BoardLogic {
         {
             possibleMoves[0] = placeId - 9;
             possibleMoves[1] = placeId - 7;
-        }else if(color == "QLight"){
-            possibleMoves[0] = placeId + 9;
-            possibleMoves[1] = placeId + 7;
-            possibleMoves[2] = placeId - 9;
-            possibleMoves[3] = placeId - 7;
         }else if(color == "QBlack"){
-            possibleMoves[0] = placeId - 9;
-            possibleMoves[1] = placeId - 7;
-            possibleMoves[2] = placeId + 9;
-            possibleMoves[3] = placeId + 7;
+            possibleMoves = ConstructQueenPath(placeId);
+
+        }else if(color == "QLight"){
+            possibleMoves = ConstructQueenPath(placeId);
         }
 
-        for(int i = 0; possibleMoves[i] != -1; i++)
+        for(int i = 0; i < 40; i++)
         {
+
             if(possibleMoves[i] > 63)
             {
                 possibleMoves[i] = -1;
@@ -951,6 +1124,26 @@ public class BoardLogic {
                 }
             }
         }
+
+        if(color == "QBlack" || color == "QLight")
+        {
+            for(int i = 0; i < 40; i++)
+            {
+                int kuriKryptis = i / 10;
+                int kurisJudesys = i % 10;
+                if(possibleMoves[i] != -1)
+                {
+                    if(statusArray[possibleMoves[i]] != "0")
+                    {
+                        for(int j = ((kuriKryptis*10) + kurisJudesys); j < (kuriKryptis + 1) * 10; j++)
+                        {
+                            possibleMoves[j] = -1;
+                        }
+                    }
+                }
+
+            }
+        }
         return possibleMoves;
     }
 
@@ -970,9 +1163,10 @@ public class BoardLogic {
 
             boolean queen = CanBeQueen2(whereToId, "Light");
             if(queen){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+                queenAnimation(destination, "Light");
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QLight";
+
             }else{
                 destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
@@ -984,8 +1178,7 @@ public class BoardLogic {
             View source = V.findViewById(checkerIDs[checkerId]);
             boolean queen = CanBeQueen2(whereToId, "Black");
             if(queen){
-                Log.d("myTag", "to queen method\n");
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                queenAnimation(destination, "Black");
                 source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
                 statusArray[whereToId] = "QBlack";
             }
@@ -1034,8 +1227,8 @@ public class BoardLogic {
         if(kirtimoColor == "Light" || kirtimoColor == "QLight")
         {
             if(CanBeQueen(destinationId, "Light")){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
-                statusArray[destinationId] = "Light";
+                queenAnimation(destination, "Light");
+                statusArray[destinationId] = "QLight";
                 BlackCaptured++;
             }else{
                 if(kirtimoColor == "QLight"){
@@ -1051,7 +1244,7 @@ public class BoardLogic {
         }else if(kirtimoColor == "Black" || kirtimoColor == "QBlack")
         {
             if(CanBeQueen(destinationId, "Black")){
-                destination.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+                queenAnimation(destination, "Black");
                 statusArray[destinationId] = "QBlack";
                 WhiteCaptured++;
             }else{
@@ -1075,11 +1268,6 @@ public class BoardLogic {
 
 
     }
-
-
-
-
-
     public void CheckerClicked2(View checkerView, Context C, View LayoutView, int placeId) {
 
         if(!pressedStatus)
@@ -1176,7 +1364,7 @@ public class BoardLogic {
                     break;
                 case "Light":
 
-                    if(statusArray[pressedId] == "BlackPressed")
+                    if(statusArray[pressedId] == "BlackPressed" || statusArray[pressedId] == "QBlackPressed")
                     {
 
                         int[] possibleMoves = FindAllPossibleKirtimai2(pressedId, statusArray[pressedId]);
@@ -1188,6 +1376,20 @@ public class BoardLogic {
                                 if(possibleMoves[i] == placeId)
                                 {
                                     Kirtimas2(LayoutView, C, pressedId, placeId, "Black");
+                                    removeHighlightedMoves(LayoutView, C);
+                                    pressedStatus = false;
+                                    pressedId = -1;
+                                }
+                            }
+                        }
+                    }else if(statusArray[pressedId] == "QBlackPressed"){
+                        int[] possibleMoves = FindAllPossibleKirtimai(pressedId, statusArray[pressedId]);
+
+                        for(int i = 0; i < 40; i++)
+                        {
+                            if(possibleMoves[i] != -1) {
+                                if (possibleMoves[i] == placeId) {
+                                    Kirtimas2(LayoutView, C, pressedId, placeId, "QBlack");
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
@@ -1214,11 +1416,26 @@ public class BoardLogic {
                                 }
                             }
                         }
+                    }else if(statusArray[pressedId] == "QLightPressed"){
+                        int[] possibleMoves = FindAllPossibleKirtimai(pressedId, statusArray[pressedId]);
+                        for(int i = 0; i < 40; i++)
+                        {
+
+                            if(possibleMoves[i] != -1)
+                            {
+                                if(possibleMoves[i] == placeId)
+                                {
+                                    Kirtimas2(LayoutView, C, pressedId, placeId, "QLight");
+                                    removeHighlightedMoves(LayoutView, C);
+                                    pressedStatus = false;
+                                    pressedId = -1;
+                                }
+                            }
+                        }
                     }
                     break;
             }
         }
-        DebugStatusArray();
         EveryCheckerPossibleMoves(2);
     }
 
@@ -1272,8 +1489,25 @@ public class BoardLogic {
         return false;
     }
 
+    //Animacijos, kai figurele pavirsta karaliene metodas
+    public void queenAnimation(View destination, String colour){
+        ImageView img = (ImageView) destination;
+        img.setBackgroundResource(R.drawable.queen_animation);
+        AnimationDrawable animation = (AnimationDrawable) img.getBackground();
 
-
-
-
+        new CountDownTimer(750, 10) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                animation.start();
+            }
+            @Override
+            public void onFinish() {
+                animation.stop();
+                if(colour == "Light")
+                    destination.setBackgroundResource(R.drawable.light_king_piece);
+                else
+                    destination.setBackgroundResource(R.drawable.dark_king_piece);
+            }
+        }.start();
+    }
 }
