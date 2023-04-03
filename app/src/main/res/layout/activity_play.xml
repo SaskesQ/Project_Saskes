@@ -12,11 +12,11 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="60dp"
         android:rotation="180"
-        android:textSize="30sp"
-        android:layout_gravity="center_horizontal|top"
-        android:text="" />
+        android:text=""
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/cboardImageView"
@@ -787,7 +787,7 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="60dp"
         android:text=""
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
     <ImageButton
         android:id="@+id/pauseButton"
@@ -847,5 +847,24 @@
         android:layout_marginTop="90dp"
         android:onClick="SurrenderBlack"
         android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:translationX="75pt"
+        android:translationY="65pt" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="263dp"
+        android:layout_height="30dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:translationX="75pt"
+        android:translationY="275pt"
+        android:visibility="visible" />
 
 </FrameLayout>

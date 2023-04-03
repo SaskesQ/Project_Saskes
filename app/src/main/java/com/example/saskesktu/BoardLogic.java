@@ -2,6 +2,7 @@ package com.example.saskesktu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,6 +17,9 @@ import java.util.Arrays;
 import kotlin.collections.IntIterator;
 
 public class BoardLogic {
+
+    View Player1TextView;
+    View Player2TextView;
     String[] statusArray; //Visų šaškių statusai
     int[] checkerIDs; //Visų šaškių ID. Naudojamas kartu su statusArray
     boolean pressedStatus; //1 - Šaškė paspausta; 0 - Šaškė nepaspausta
@@ -50,6 +54,8 @@ public class BoardLogic {
 
         pressedStatus = false;
         pressedId = -1;
+
+
     }
 
     /**

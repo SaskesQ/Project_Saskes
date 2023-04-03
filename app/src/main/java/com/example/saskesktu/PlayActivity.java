@@ -10,21 +10,32 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.saskesktu.MainActivity;
 public class PlayActivity extends AppCompatActivity {
 
     BoardLogic boardLogic;
     TextView BlackCapturedTextView;
     TextView WhiteCapturedTextView;
+    TextView Player1TextView;
+    TextView Player2TextView;
 
+    String player1Name;
+
+    String player2Name;
+    MainActivity PLayers;
     boolean switch_status = false;
 
     @Override
@@ -33,6 +44,101 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
         BlackCapturedTextView = findViewById(R.id.textView12);
         WhiteCapturedTextView = findViewById(R.id.textView11);
+        Player1TextView= findViewById(R.id.textView13);
+        Player2TextView= findViewById(R.id.textView14);
+        Intent intent = new Intent(this, MainActivity.class);
+
+        //------------------------------------------------------------------------------------------------------------
+
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(PlayActivity.this);
+        builder2.setTitle("Player2 name");
+        builder2.setMessage("Player2, please sign your name.\n");
+
+        final EditText nameInput2 = new EditText(PlayActivity.this);
+        // Set the message and title of the popup window
+
+
+
+
+        nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder2.setView(nameInput2);
+        //EditText nameInput2 = new EditText(MainActivity.this);
+        //nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
+
+
+
+
+
+        builder2.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                player2Name=nameInput2.getText().toString();
+
+
+
+                Toast.makeText(PlayActivity.this, "Player2 name is " + player2Name, Toast.LENGTH_LONG).show();
+                Player2TextView.setText(String.valueOf(player2Name));
+
+
+            }
+        });
+        builder2.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                startActivity(intent);
+                dialogInterface.cancel();
+            }
+        });
+
+        //--------------------------------------------------------------------
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(PlayActivity.this);
+        builder1.setTitle("Player1 name");
+        builder1.setMessage("PLayer1, please sign your name.\n" );
+
+        final EditText nameInput1 = new EditText(PlayActivity.this);
+        // Set the message and title of the popup window
+
+        //Intent intent = new Intent(this, PlayActivity.class);
+        // startActivity(intent);
+
+
+        nameInput1.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder1.setView(nameInput1);
+        //EditText nameInput2 = new EditText(MainActivity.this);
+        //nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
+
+
+
+
+
+        builder1.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                player1Name=nameInput1.getText().toString();
+                Player1TextView.setText(String.valueOf(player1Name));
+                Toast.makeText(PlayActivity.this, "Player1 name is " + player1Name, Toast.LENGTH_LONG).show();
+                builder2.show();
+
+
+            }
+        });
+        builder1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                dialogInterface.cancel();
+                startActivity(intent);
+            }
+        });
+
+
+
+        builder1.show();
+
+
+
+
+        //---------------------------------------------------------------------------------------------------------------
+
 
         //Paslepiamas ActionBar'as
         ActionBar actionBar = getSupportActionBar();
@@ -60,9 +166,15 @@ public class PlayActivity extends AppCompatActivity {
         boardLogic.SwitchWasPressed(PlayActivity.this,returnBoardView());
         if (!switch_status){
             switch_status=true;
+            Player1TextView.setText(String.valueOf(player2Name));
+            Player2TextView.setText(String.valueOf(player1Name));
         }
-        else
-            switch_status=false;
+        else {
+            switch_status = false;
+            Player1TextView.setText(String.valueOf(player1Name));
+            Player2TextView.setText(String.valueOf(player2Name));
+
+        }
     }
 
 
