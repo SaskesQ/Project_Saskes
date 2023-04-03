@@ -41,13 +41,13 @@ public class BoardLogic extends PlayActivity {
         };
 
         checkerIDs = new int[] {R.id.c0, R.id.c1, R.id.c2, R.id.c3, R.id.c4, R.id.c5, R.id.c6, R.id.c7,
-                                    R.id.c8, R.id.c9, R.id.c10, R.id.c11, R.id.c12, R.id.c13, R.id.c14, R.id.c15,
-                                    R.id.c16, R.id.c17, R.id.c18, R.id.c19, R.id.c20, R.id.c21, R.id.c22, R.id.c23,
-                                    R.id.c24, R.id.c25, R.id.c26, R.id.c27, R.id.c28, R.id.c29, R.id.c30, R.id.c31,
-                                    R.id.c32, R.id.c33, R.id.c34, R.id.c35, R.id.c36, R.id.c37, R.id.c38, R.id.c39,
-                                    R.id.c40, R.id.c41, R.id.c42, R.id.c43, R.id.c44, R.id.c45, R.id.c46, R.id.c47,
-                                    R.id.c48, R.id.c49, R.id.c50, R.id.c51, R.id.c52, R.id.c53, R.id.c54, R.id.c55,
-                                    R.id.c56, R.id.c57, R.id.c58, R.id.c59, R.id.c60, R.id.c61, R.id.c62, R.id.c63};
+                                R.id.c8, R.id.c9, R.id.c10, R.id.c11, R.id.c12, R.id.c13, R.id.c14, R.id.c15,
+                                R.id.c16, R.id.c17, R.id.c18, R.id.c19, R.id.c20, R.id.c21, R.id.c22, R.id.c23,
+                                R.id.c24, R.id.c25, R.id.c26, R.id.c27, R.id.c28, R.id.c29, R.id.c30, R.id.c31,
+                                R.id.c32, R.id.c33, R.id.c34, R.id.c35, R.id.c36, R.id.c37, R.id.c38, R.id.c39,
+                                R.id.c40, R.id.c41, R.id.c42, R.id.c43, R.id.c44, R.id.c45, R.id.c46, R.id.c47,
+                                R.id.c48, R.id.c49, R.id.c50, R.id.c51, R.id.c52, R.id.c53, R.id.c54, R.id.c55,
+                                R.id.c56, R.id.c57, R.id.c58, R.id.c59, R.id.c60, R.id.c61, R.id.c62, R.id.c63};
 
 
         pressedStatus = false;

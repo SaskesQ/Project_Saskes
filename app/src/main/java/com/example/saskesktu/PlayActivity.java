@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
@@ -47,38 +48,25 @@ public class PlayActivity extends AppCompatActivity {
         Player2TextView= findViewById(R.id.textView14);
         Intent intent = new Intent(this, MainActivity.class);
 
-        //------------------------------------------------------------------------------------------------------------
+        //Iskvieciamas metodas, parenkantis atitinkama lentos modeli
+        boardBackgroundV();
 
+        //------------------------------------------------------------------------------------------------------------
         AlertDialog.Builder builder2 = new AlertDialog.Builder(PlayActivity.this);
         builder2.setTitle("Player2 name");
         builder2.setMessage("Player2, please sign your name.\n");
-
         final EditText nameInput2 = new EditText(PlayActivity.this);
         // Set the message and title of the popup window
-
-
-
-
         nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
         builder2.setView(nameInput2);
         //EditText nameInput2 = new EditText(MainActivity.this);
         //nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
-
-
-
-
-
         builder2.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 player2Name=nameInput2.getText().toString();
-
-
-
                 Toast.makeText(PlayActivity.this, "Player2 name is " + player2Name, Toast.LENGTH_LONG).show();
                 Player2TextView.setText(String.valueOf(player2Name));
-
-
             }
         });
         builder2.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -96,20 +84,12 @@ public class PlayActivity extends AppCompatActivity {
 
         final EditText nameInput1 = new EditText(PlayActivity.this);
         // Set the message and title of the popup window
-
         //Intent intent = new Intent(this, PlayActivity.class);
         // startActivity(intent);
-
-
         nameInput1.setInputType(InputType.TYPE_CLASS_TEXT);
         builder1.setView(nameInput1);
         //EditText nameInput2 = new EditText(MainActivity.this);
         //nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
-
-
-
-
-
         builder1.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
@@ -117,8 +97,6 @@ public class PlayActivity extends AppCompatActivity {
                 Player1TextView.setText(String.valueOf(player1Name));
                 Toast.makeText(PlayActivity.this, "Player1 name is " + player1Name, Toast.LENGTH_LONG).show();
                 builder2.show();
-
-
             }
         });
         builder1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -128,24 +106,26 @@ public class PlayActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
         builder1.show();
-
-
-
-
         //---------------------------------------------------------------------------------------------------------------
-
 
         //Paslepiamas ActionBar'as
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-
-
         boardLogic = new BoardLogic();
+    }
+    public void boardBackgroundV(){
+        SharedPreferences pref = getSharedPreferences("BG_VAL", MODE_PRIVATE);
+        int bg_val = pref.getInt("BG_VAL", 1);
+        View board = findViewById(R.id.cboardImageView);
+        switch (bg_val) {
+            case 2:
+                board.setBackgroundResource(R.drawable.checkers_board_background_v2);
+                break;
+            default:
+                board.setBackgroundResource(R.drawable.checkers_board_background);
+        }
     }
 
     public void escape1 (View V){
@@ -261,5 +241,44 @@ public class PlayActivity extends AppCompatActivity {
         gameOver(V, "White");
         else
             gameOver(V, "Black");
+    }
+    public void surrenderAysWhite(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to surrender ?").setTitle("Surrender");
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                SurrenderWhite(v);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void surrenderAysBlack(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to surrender ?").setTitle("Surrender");
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                SurrenderBlack(v);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 }
