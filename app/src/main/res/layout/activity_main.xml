@@ -32,7 +32,7 @@
             android:layout_width="80dp"
             android:layout_height="55dp"
             android:backgroundTint="#A16E570A"
-            android:translationX="90dp"
+            android:translationX="20dp"
 
             app:icon="@android:drawable/ic_lock_silent_mode_off"
             app:iconTint="#000000" />
@@ -51,6 +51,36 @@
             app:iconSize="50dp"
             app:iconTint="#000000" />
 
+        <ImageButton
+            android:id="@+id/btnLT"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:translationX="-20dp"
+            android:translationY="20dp"
+            app:srcCompat="@drawable/lt" />
+
+        <Button
+            android:id="@+id/lang_button"
+            android:layout_width="74dp"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:backgroundTint="#A16E570A"
+            android:text="LANG"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:translationX="-50dp"
+            android:translationY="-15dp" />
+
+        <ImageButton
+            android:id="@+id/btnEN"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:translationX="-85dp"
+            android:translationY="20dp"
+            app:srcCompat="@drawable/en" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -61,10 +91,10 @@
         android:paddingTop="100dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/checkers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Šaškės KTU"
+            android:text="@string/checkers"
             android:textColor="#000000"
             android:textSize="50sp"
             android:textStyle="bold" />
@@ -84,7 +114,7 @@
             android:layout_height="60dp"
             android:background="#A16E570A"
             android:onClick="play"
-            android:text="Play"
+            android:text="@string/play"
             android:textColor="#000000"
             android:textSize="25sp"
             app:backgroundTint="@null" />
@@ -98,12 +128,12 @@
         android:paddingTop="25dp">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/options"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:background="#A16E570A"
             android:onClick="options"
-            android:text="Options"
+            android:text="@string/options"
             android:textColor="#000000"
             android:textSize="15sp"
             app:backgroundTint="@null" />
@@ -118,12 +148,12 @@
         android:paddingTop="25dp">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/help"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:background="@drawable/custom_button"
             android:onClick="help"
-            android:text="Help"
+            android:text="@string/help"
             android:textColor="#000000"
             android:textSize="15sp"
             app:backgroundTint="#A16E570A" />
@@ -137,12 +167,12 @@
         android:paddingTop="175dp">
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/credits"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:background="@drawable/custom_button"
             android:onClick="credits"
-            android:text="Credits"
+            android:text="@string/credits"
             android:textColor="#000000"
             android:textSize="15sp"
             app:backgroundTint="#A16E570A" />

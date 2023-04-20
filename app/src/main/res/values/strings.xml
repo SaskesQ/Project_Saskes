@@ -1,11 +1,41 @@
 <resources>
     <string name="app_name">SaskesKTU</string>
+    <string name="selected_language">English</string>
     <string name="article_string">Article</string>
-    <string name="article_subheading">Article Subheading</string>
-    <string name="paragraph">  Žaidėjų tikslas šaškėse – nukirsti visas priešininko šaškes arba sudaryti tokią situaciją, kad priešininkui nebeliktų ėjimų.\n\n
-        Šaškės žaidžiamos paeiliui, po vieną ėjimą ant juodos spalvos langelių. Žaidimą pradeda <b>šviesiosios</b> (<i>jei nesusitarta kitaip</i>) ir einama <b>tik įstrižai</b>, po vieną langelį (taip vaikšto paprastos šaškės, nevirtusios damomis).\n\n
-        Priešininko šaškė nukertama peršokant per ją, kirtimas yra privalomas ir gali būti atliktas tik pirmyn(<i>priklausomai nuo nustatytų žaidimo taisyklių</i>).\n\n
-        Vieno ėjimo metu gali būti atlikti <b>keli kirtimai</b>, jeigu peršokus šaškę atsiduriama langelyje šalia kitos kertamos šaškės. Iki galinės linijos („Karalių eilės“) nuėjusi šaškė pavirsta dama, kuriai suteikiamos papildomos galios – ji gali vaikščioti pirmyn ir atgal po vieną langelį(taip pat priklausomai nuo nustatytų žaidimo taisyklių). \n\n Šaškė pavirsti dama gali ir kirtimo metu, jeigu viename iš kirtimo etapų ji atsiduria ant galinės linijos.
-
-    </string>
+    <string name="paragraph">The goal of the players in checkers is to cut down all of the opponents
+         checkers or create such a situation that the opponent has no more moves.\n\n
+         Checkers are played sequentially, one move at a time on black squares. The game is started
+         by <b>whites</b> (<i>unless otherwise agreed upon</i>) and goes <b>only diagonally</b>,
+         one square at a time (this is how ordinary checkers, not turned into queens, walk).\n\n
+         The opponents checker is cut by jumping over it, the cut is mandatory and can only be done
+         forward(<i>depending on the set rules of the game</i>).\n\n
+         <b>several crossings</b> can be done during one move, if after jumping over a checker you
+         end up in a square next to another crossed checker. A checker that has reached the end line
+         ("Kings row") turns into a queen, which is given additional powers - it can walk back and
+         forth one square at a time (also depending on the set rules of the game). \n\n A checker
+         can also turn into a queen during crossing, if it is on the end line during one of the crossing stages.</string>
+    <string name="checkers">KTU Checkers</string>
+    <string name="devs">Developers of the project</string>
+    <string name="play">Play</string>
+    <string name="options">Options</string>
+    <string name="help">Help</string>
+    <string name="credits">Credits</string>
+    <string name="sound">Sound</string>
+    <string name="music">Music</string>
+    <string name="boardBg">Select the board model you want:</string>
+    <string name="paused">PAUSED</string>
+    <string name="resume">Resume</string>
+    <string name="surrender">Are you sure you want to surrender ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="surr">Surrender</string>
+    <string name="winner">The winner is:</string>
+    <string name="gameover">Game Over</string>
+    <string name="player">Player</string>
+    <string name="name">" please sign your name"</string>
+    <string name="nameIs">" name is"</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="timeSettings">Game options</string>
+    <string name="cont">Continue</string>
 </resources>

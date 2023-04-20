@@ -53,23 +53,24 @@ public class PlayActivity extends AppCompatActivity {
 
         //------------------------------------------------------------------------------------------------------------
         AlertDialog.Builder builder2 = new AlertDialog.Builder(PlayActivity.this);
-        builder2.setTitle("Player2 name");
-        builder2.setMessage("Player2, please sign your name.\n");
+        builder2.setTitle(getResources().getString(R.string.player) + "2");
+        builder2.setMessage(getResources().getString(R.string.player) + "2," + getResources().getString(R.string.name));
         final EditText nameInput2 = new EditText(PlayActivity.this);
         // Set the message and title of the popup window
         nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
         builder2.setView(nameInput2);
         //EditText nameInput2 = new EditText(MainActivity.this);
         //nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder2.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+        builder2.setPositiveButton(getResources().getString(R.string.done), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 player2Name=nameInput2.getText().toString();
-                Toast.makeText(PlayActivity.this, "Player2 name is " + player2Name, Toast.LENGTH_LONG).show();
+                Toast.makeText(PlayActivity.this, getResources().getString(R.string.player)
+                        + "2" + getResources().getString(R.string.nameIs)+ " " + player2Name, Toast.LENGTH_LONG).show();
                 Player2TextView.setText(String.valueOf(player2Name));
             }
         });
-        builder2.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder2.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int id) {
                 startActivity(intent);
@@ -79,8 +80,8 @@ public class PlayActivity extends AppCompatActivity {
 
         //--------------------------------------------------------------------
         AlertDialog.Builder builder1 = new AlertDialog.Builder(PlayActivity.this);
-        builder1.setTitle("Player1 name");
-        builder1.setMessage("PLayer1, please sign your name.\n" );
+        builder1.setTitle(getResources().getString(R.string.player) + "1");
+        builder1.setMessage(getResources().getString(R.string.player)+"1," + getResources().getString(R.string.name));
 
         final EditText nameInput1 = new EditText(PlayActivity.this);
         // Set the message and title of the popup window
@@ -90,16 +91,17 @@ public class PlayActivity extends AppCompatActivity {
         builder1.setView(nameInput1);
         //EditText nameInput2 = new EditText(MainActivity.this);
         //nameInput2.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder1.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+        builder1.setPositiveButton(getResources().getString(R.string.done), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 player1Name=nameInput1.getText().toString();
                 Player1TextView.setText(String.valueOf(player1Name));
-                Toast.makeText(PlayActivity.this, "Player1 name is " + player1Name, Toast.LENGTH_LONG).show();
+                Toast.makeText(PlayActivity.this, getResources().getString(R.string.player)
+                        + "1" + getResources().getString(R.string.nameIs) + " " + player1Name, Toast.LENGTH_LONG).show();
                 builder2.show();
             }
         });
-        builder1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder1.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int id) {
                 dialogInterface.cancel();
@@ -214,8 +216,8 @@ public class PlayActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         // Set the message and title of the popup window
-        builder.setMessage("The winner is " + winner + "!")
-                .setTitle("Game Over");
+        builder.setMessage(getResources().getString(R.string.winner) + " " + winner + "!")
+                .setTitle(getResources().getString(R.string.gameover));
 
         // Add a button to the popup window
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -244,15 +246,15 @@ public class PlayActivity extends AppCompatActivity {
     }
     public void surrenderAysWhite(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to surrender ?").setTitle("Surrender");
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setMessage(getResources().getString(R.string.surrender)).setTitle(getResources().getString(R.string.surr));
+        builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 SurrenderWhite(v);
@@ -263,15 +265,15 @@ public class PlayActivity extends AppCompatActivity {
     }
     public void surrenderAysBlack(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to surrender ?").setTitle("Surrender");
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setMessage(getResources().getString(R.string.surrender)).setTitle(getResources().getString(R.string.surr));
+        builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 SurrenderBlack(v);

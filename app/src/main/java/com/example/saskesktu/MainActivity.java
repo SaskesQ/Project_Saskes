@@ -3,7 +3,10 @@ package com.example.saskesktu;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -12,13 +15,20 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     //Kintamieji reikalingi background muzikai
     MediaPlayer backgroundSong;
+    //Kintamieji kalbos keitimui
+    Resources resources;
+    Context context;
     boolean isPlaying = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +41,40 @@ public class MainActivity extends AppCompatActivity {
         //Paslepiamas ActionBar'as
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        //Kalbos pakeitimas
+        ImageButton btnEN = findViewById(R.id.btnEN);
+        ImageButton btnLT = findViewById(R.id.btnLT);
+        btnEN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateLanguage("en");
+                recreate();
+            }
+        });
+        btnLT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateLanguage("lt");
+                recreate();
+            }
+        });
+    }
+    //metodas pakeisti kalbai
+    private void updateLanguage(String langCode) {
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+        Resources resources = getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     // Reaguoja į "Play" mygtuko paspaudimą, metodo pavadinimas sutampa su mygtuko argumentu "onClick"
     // Atidaro naują langą (naują "Activity")
     public void play(View v)
     {
-        Intent intent = new Intent(this, PlayActivity.class);
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
     public void exit_app(View v){

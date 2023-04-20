@@ -20,10 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="70dp"
-            android:text="Garso lygis"
+            android:text="@string/sound"
             android:textAllCaps="false"
-            android:textSize="24sp"
-            />
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
-            android:text="Muzikos lygis"
+            android:text="@string/music"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/soundBar" />
@@ -97,7 +96,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="17dp"
             android:paddingTop="20dp"
-            android:text="Pasirinkitę norimą lentos modelį:"
+            android:text="@string/boardBg"
             android:textSize="26sp" />
 
         <ImageButton
