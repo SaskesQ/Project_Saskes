@@ -27,6 +27,15 @@
     <string name="player">Žaidėjas</string>
     <string name="name">" prašome įvesti savo vardą"</string>
     <string name="nameIs">" vardas yra"</string>
+    <string name="t10">10</string>
+    <string name="t15">15</string>
+    <string name="t20">20</string>
+    <string name="t25">25</string>
+    <string name="t30">30</string>
+    <string name="TimeTittle">" Mačo trukmė:"</string>
+    <string name="WrongNumber">Skaičius yra didesnis už 30 arba mažesnis už 5</string>
+    <string name="NumberPlease">Prašau parašyti skaičių</string>
+    <string name="Timemessage">Pasirinkite mačo trukmę(nuo 5 iki 30 minučių):</string>
     <string name="cancel">Atšaukti</string>
     <string name="done">Baigti</string>
     <string name="timeSettings">Žaidimo nustatymai</string>

@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
@@ -23,7 +22,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.saskesktu.MainActivity;
 public class PlayActivity extends AppCompatActivity {
 
     BoardLogic boardLogic;
@@ -32,6 +30,7 @@ public class PlayActivity extends AppCompatActivity {
     TextView Player1TextView;
     TextView Player2TextView;
 
+    int mačoLaikas;
     String player1Name;
 
     String player2Name;
@@ -50,8 +49,50 @@ public class PlayActivity extends AppCompatActivity {
 
         //Iskvieciamas metodas, parenkantis atitinkama lentos modeli
         boardBackgroundV();
+        // Langas mačo laikui-------------------------------------------------------
+        AlertDialog.Builder builder4 = new AlertDialog.Builder(PlayActivity.this);
+        builder4.setTitle(getResources().getString(R.string.TimeTittle));
+        builder4.setMessage(getResources().getString(R.string.Timemessage));
+        final EditText nameInput4 = new EditText(PlayActivity.this);
 
-        //------------------------------------------------------------------------------------------------------------
+        // Set the message and title of the popup window
+        nameInput4.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder4.setView(nameInput4);
+        builder4.setPositiveButton(getResources().getString(R.string.done), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                try {
+                    mačoLaikas = Integer.parseInt(nameInput4.getText().toString());
+                    if(mačoLaikas <5 || mačoLaikas>30) {
+                        Toast.makeText(PlayActivity.this, getResources().getString(R.string.WrongNumber), Toast.LENGTH_LONG).show();
+                        builder4.show();
+                    }
+
+                 }
+                catch (NumberFormatException nfe){
+                    Toast.makeText(PlayActivity.this, getResources().getString(R.string.NumberPlease), Toast.LENGTH_LONG).show();
+                    builder4.show();
+                }
+
+
+            }
+        });
+
+        builder4.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                startActivity(intent);
+                dialogInterface.cancel();
+            }
+        });
+
+
+
+
+
+
+
+        //Langas parašantis žaidėjų vardus------------------------------------------------------------------------------------------------------------
         AlertDialog.Builder builder2 = new AlertDialog.Builder(PlayActivity.this);
         builder2.setTitle(getResources().getString(R.string.player) + "2");
         builder2.setMessage(getResources().getString(R.string.player) + "2," + getResources().getString(R.string.name));
@@ -68,6 +109,7 @@ public class PlayActivity extends AppCompatActivity {
                 Toast.makeText(PlayActivity.this, getResources().getString(R.string.player)
                         + "2" + getResources().getString(R.string.nameIs)+ " " + player2Name, Toast.LENGTH_LONG).show();
                 Player2TextView.setText(String.valueOf(player2Name));
+                builder4.show();
             }
         });
         builder2.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
