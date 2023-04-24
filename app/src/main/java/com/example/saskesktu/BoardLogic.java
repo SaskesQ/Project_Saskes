@@ -297,6 +297,17 @@ public class BoardLogic extends PlayActivity {
         possibleMoves[2] = placeId + 7;
         possibleMoves[3] = placeId + 9;
 
+        for(int i = 0; i < 40; i++)
+        {
+            if(possibleMoves[i] < 0)
+            {
+                possibleMoves[i] = -1;
+            }else if(possibleMoves[i] > 64)
+            {
+                possibleMoves[i] = -1;
+            }
+        }
+
         for (int i = 0; i < 40; i++) {
             if(possibleMoves[i] != -1)
             {
@@ -310,19 +321,23 @@ public class BoardLogic extends PlayActivity {
 
         for(int i = 0; i < 40; i++)
         {
-            if(color == "Black" || color == "QBlack")
+            if(possibleMoves[i] != -1)
             {
-                if(statusArray[possibleMoves[i]] != "Light")
+                if(color == "Black" || color == "QBlack")
                 {
-                    possibleMoves[i] = -1;
-                }
-            }else if(color == "Light" || color == "QLight")
-            {
-                if(statusArray[possibleMoves[i]] != "Black")
+                    if(statusArray[possibleMoves[i]] != "Light")
+                    {
+                        possibleMoves[i] = -1;
+                    }
+                }else if(color == "Light" || color == "QLight")
                 {
-                    possibleMoves[i] = -1;
+                    if(statusArray[possibleMoves[i]] != "Black")
+                    {
+                        possibleMoves[i] = -1;
+                    }
                 }
             }
+
         }
 
         for(int i = 0; i < 40; i++) {
@@ -757,6 +772,12 @@ public class BoardLogic extends PlayActivity {
      * Kirtimo funkcija. Apkeičia šaškę su priešininko šaške
      * ** Pakoreguota funkcija, kad po kirtimo šakė galėtų patapti karaliene, jei yra galima
      */
+    public void patikrintiDoubleKirtimus(int saskesId)
+    {
+        String saskesStatus = statusArray[saskesId];
+
+
+    }
     public void Kirtimas(View V, Context C, int sourceKirtimasId, int nukirstaId, String kirtimoColor)
     {
 
@@ -838,12 +859,64 @@ public class BoardLogic extends PlayActivity {
 
 
     }
+    public boolean ArYraKirtimas(int[] possibleKirtimai)
+    {
+        for(int i = 0; i < 40; i++)
+        {
+            if(possibleKirtimai[i] != -1)
+                return true;
+        }
+        return false;
+    }
+    public boolean tikrintiArNeraKirtimu()
+    {
+        int[] possibleKirtimai;
+        //Raudona
+        if(whichSide)
+        {
+            for(int i = 0; i < 64; i++)
+            {
+                if(statusArray[i] == "Light" || statusArray[i] == "LightPressed")
+                {
+                    possibleKirtimai = FindAllPossibleKirtimai(i, statusArray[i]);
+                    if(ArYraKirtimas(possibleKirtimai))
+                        return true;
+                }else if(statusArray[i] == "QLight" || statusArray[i] == "QLightPressed")
+                {
+                    possibleKirtimai = FindAllPossibleKirtimaiQueen(i, statusArray[i]);
+                    if(ArYraKirtimas(possibleKirtimai))
+                        return true;
+                }
+            }
+        }else{//Juoda
+            for(int i = 0; i < 64; i++)
+            {
+                if(statusArray[i] == "Black" || statusArray[i] == "BlackPressed")
+                {
+                    possibleKirtimai = FindAllPossibleKirtimai(i, statusArray[i]);
+                    if(ArYraKirtimas(possibleKirtimai))
+                        return true;
+                }else if(statusArray[i] == "QBlack" || statusArray[i] == "QBlackPressed")
+                {
+                    possibleKirtimai = FindAllPossibleKirtimaiQueen(i, statusArray[i]);
+                    if(ArYraKirtimas(possibleKirtimai))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Pagrindinė funkcija šaškių paspaudimų valdymui.
      * ** Pakoreguota funkcija. Pridėta karlienės paspaudimo valdymas
      */
     public void CheckerClicked(View checkerView, Context C, View LayoutView, int placeId) {
+//
+//    if(tikrintiArNeraKirtimu())
+//        Log.d("Yra", "Yra");
+//    else
+//        Log.d("Ne", "Ne");
 
     if(!whichSide)
     {
