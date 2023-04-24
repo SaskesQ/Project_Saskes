@@ -70,7 +70,7 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
+                android:background="@drawable/dark_piece"
                 android:onClick="onCheckerClick" />
 
             <ImageButton
@@ -152,7 +152,7 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/light_piece"
+                android:background="@drawable/dark_piece"
                 android:contextClickable="false"
                 android:onClick="onCheckerClick" />
 
@@ -173,7 +173,7 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/blank_square"
+                android:background="@drawable/dark_piece"
                 android:contextClickable="false"
                 android:onClick="onCheckerClick" />
 

@@ -28,10 +28,12 @@ public class BoardLogic extends PlayActivity {
 
     int move_count = 0;
 
+    boolean whichSide = false; //0 - raudoni 1 - juodi
+
     public BoardLogic(){
         statusArray = new String[]{
-                "Black", "NA", "0", "NA", "Black", "NA", "Black", "NA",
-                "NA", "Light", "NA", "0", "NA", "Black", "NA", "Black",
+                "Black", "NA", "Black", "NA", "Black", "NA", "Black", "NA",
+                "NA", "Black", "NA", "Black", "NA", "Black", "NA", "Black",
                 "Black", "NA", "Black", "NA", "Black", "NA", "Black", "NA",
                 "NA", "0", "NA", "0", "NA", "0", "NA", "0",
                 "0", "NA", "0", "NA", "0", "NA", "0", "NA",
@@ -843,21 +845,13 @@ public class BoardLogic extends PlayActivity {
      */
     public void CheckerClicked(View checkerView, Context C, View LayoutView, int placeId) {
 
+    if(!whichSide)
+    {
         if(!pressedStatus)
         {
 
             switch(statusArray[placeId])
             {
-                case "Black":
-                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_pressed));
-
-                    statusArray[placeId] = "BlackPressed";
-                    pressedStatus = true;
-                    pressedId = placeId;
-
-                    HighlightPossibleMoves(LayoutView, C, placeId, "Black");
-                    break;
-
                 case "Light":
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece_pressed));
 
@@ -866,14 +860,6 @@ public class BoardLogic extends PlayActivity {
                     pressedId = placeId;
 
                     HighlightPossibleMoves(LayoutView, C, placeId, "Light");
-                    break;
-                case "QBlack": //karalienes paspaudimas
-                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_pressed));
-                    statusArray[placeId] = "QBlackPressed";
-                    pressedStatus = true;
-                    pressedId = placeId;
-
-                    HighlightPossibleMoves(LayoutView, C, placeId, "QBlack");
                     break;
                 case "QLight": //karalienes paspaudimas
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece_pressed));
@@ -886,17 +872,6 @@ public class BoardLogic extends PlayActivity {
             }
         }else{
             switch(statusArray[placeId]) {
-                case "BlackPressed":
-                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
-
-                    statusArray[placeId] = "Black";
-                    pressedStatus = false;
-                    pressedId = -1;
-
-                    removeHighlightedMoves(LayoutView, C);
-
-                    break;
-
                 case "LightPressed":
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
 
@@ -915,15 +890,6 @@ public class BoardLogic extends PlayActivity {
 
                     removeHighlightedMoves(LayoutView, C);
                     break;
-                case "QBlackPressed":
-                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
-
-                    statusArray[placeId] = "QBlack";
-                    pressedStatus = false;
-                    pressedId = -1;
-
-                    removeHighlightedMoves(LayoutView, C);
-                    break;
                 case "AvailableMove":
                     MoveCheckerPiece(LayoutView, C, pressedId, placeId);
                     View switch_button = LayoutView.findViewById(R.id.switch_sides);
@@ -934,7 +900,7 @@ public class BoardLogic extends PlayActivity {
                     statusArray[pressedId] = "0";
                     pressedStatus = false;
                     pressedId = -1;
-
+                    whichSide = !whichSide;
                     break;
                 case "QBlack":
                 case "Black":
@@ -954,6 +920,7 @@ public class BoardLogic extends PlayActivity {
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
+                                    whichSide = !whichSide;
                                 }
                             }
                         }
@@ -970,10 +937,73 @@ public class BoardLogic extends PlayActivity {
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
+                                    whichSide = !whichSide;
                                 }
                             }
                         }
                     }
+                    break;
+
+            }
+        }
+    }else{
+
+        if(!pressedStatus)
+        {
+
+            switch(statusArray[placeId])
+            {
+                case "Black":
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_pressed));
+
+                    statusArray[placeId] = "BlackPressed";
+                    pressedStatus = true;
+                    pressedId = placeId;
+
+                    HighlightPossibleMoves(LayoutView, C, placeId, "Black");
+                    break;
+                case "QBlack": //karalienes paspaudimas
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_pressed));
+                    statusArray[placeId] = "QBlackPressed";
+                    pressedStatus = true;
+                    pressedId = placeId;
+
+                    HighlightPossibleMoves(LayoutView, C, placeId, "QBlack");
+                    break;
+            }
+        }else{
+            switch(statusArray[placeId]) {
+                case "BlackPressed":
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
+
+                    statusArray[placeId] = "Black";
+                    pressedStatus = false;
+                    pressedId = -1;
+
+                    removeHighlightedMoves(LayoutView, C);
+
+                    break;
+
+                case "QBlackPressed":
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+
+                    statusArray[placeId] = "QBlack";
+                    pressedStatus = false;
+                    pressedId = -1;
+
+                    removeHighlightedMoves(LayoutView, C);
+                    break;
+                case "AvailableMove":
+                    MoveCheckerPiece(LayoutView, C, pressedId, placeId);
+                    View switch_button = LayoutView.findViewById(R.id.switch_sides);
+                    switch_button.setVisibility(View.INVISIBLE);
+                    move_count =  move_count +1;
+
+                    removeHighlightedMoves(LayoutView, C);//
+                    statusArray[pressedId] = "0";
+                    pressedStatus = false;
+                    pressedId = -1;
+                    whichSide = !whichSide;
                     break;
                 case "QLight":
                 case "Light":
@@ -991,6 +1021,7 @@ public class BoardLogic extends PlayActivity {
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
+                                    whichSide = !whichSide;
                                 }
                             }
                         }
@@ -1007,6 +1038,7 @@ public class BoardLogic extends PlayActivity {
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
+                                    whichSide = !whichSide;
                                 }
                             }
                         }
@@ -1015,6 +1047,8 @@ public class BoardLogic extends PlayActivity {
 
             }
         }
+    }
+
     }
 
 
