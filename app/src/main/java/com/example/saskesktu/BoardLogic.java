@@ -28,9 +28,17 @@ public class BoardLogic extends PlayActivity {
 
     int move_count = 0;
 
+    CountDownTimer WhiteTimer;
+    CountDownTimer BlackTimer;
+
     boolean whichSide = false; //0 - raudoni 1 - juodi
 
-    public BoardLogic(){
+    public BoardLogic(CountDownTimer WhiteTimer, CountDownTimer BlackTimer){
+        if(WhiteTimer == null) {
+            throw new IllegalArgumentException("WhiteTimer cannot be null");
+        }
+        this.WhiteTimer = WhiteTimer;
+        this.BlackTimer = BlackTimer;
         statusArray = new String[]{
                 "Black", "NA", "Black", "NA", "Black", "NA", "Black", "NA",
                 "NA", "Black", "NA", "Black", "NA", "Black", "NA", "Black",
@@ -672,7 +680,6 @@ public class BoardLogic extends PlayActivity {
             }
         }
     }
-
     /**
      * Šaškės judėjimo funkcija.
      * ** Pakoreguota funkcija, ėjimo metu tikrina ar figūrėlė gali tapti karaliene, jei taip
@@ -684,6 +691,9 @@ public class BoardLogic extends PlayActivity {
 
         if(statusArray[checkerId] == "BlackPressed"){
 
+
+            BlackTimer.cancel();
+            WhiteTimer.start();
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
 
@@ -700,6 +710,8 @@ public class BoardLogic extends PlayActivity {
             }
         }else if(statusArray[checkerId] == "LightPressed")
         {
+            WhiteTimer.cancel();
+            BlackTimer.start();
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
             boolean queen = CanBeQueen(whereToId, "Light");
@@ -717,6 +729,8 @@ public class BoardLogic extends PlayActivity {
                 statusArray[whereToId] = "Light";
             }
         }else if(statusArray[checkerId] == "QBlackPressed"){
+            BlackTimer.cancel();
+            WhiteTimer.start();
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
 
@@ -724,6 +738,8 @@ public class BoardLogic extends PlayActivity {
             source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
             statusArray[whereToId] = "QBlack";
         }else if(statusArray[checkerId] == "QLightPressed"){
+            WhiteTimer.cancel();
+            BlackTimer.start();
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
 

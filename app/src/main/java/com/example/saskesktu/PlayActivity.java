@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,17 +27,24 @@ import android.widget.Toast;
 public class PlayActivity extends AppCompatActivity {
 
     BoardLogic boardLogic;
+    private CountDownTimer WhiteTimer;
+    private CountDownTimer BlackTimer;
+    TextView WhiteTimerTextView;
+    TextView BlackTimerTextView;
     TextView BlackCapturedTextView;
     TextView WhiteCapturedTextView;
     TextView Player1TextView;
     TextView Player2TextView;
 
     int mačoLaikas;
+    long testlaikas = 60000;
+    long LongLaikas;
     String player1Name;
 
     String player2Name;
     MainActivity PLayers;
     boolean switch_status = false;
+    View v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +54,10 @@ public class PlayActivity extends AppCompatActivity {
         WhiteCapturedTextView = findViewById(R.id.textView11);
         Player1TextView= findViewById(R.id.textView13);
         Player2TextView= findViewById(R.id.textView14);
+        WhiteTimerTextView = findViewById(R.id.whitetimer);
+        BlackTimerTextView = findViewById(R.id.blacktimer);
         Intent intent = new Intent(this, MainActivity.class);
+
 
         //Iskvieciamas metodas, parenkantis atitinkama lentos modeli
         boardBackgroundV();
@@ -62,10 +74,16 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 try {
-                    mačoLaikas = Integer.parseInt(nameInput4.getText().toString());
-                    if(mačoLaikas <5 || mačoLaikas>30) {
+                    mačoLaikas = 60000*Integer.parseInt(nameInput4.getText().toString());
+                    LongLaikas = Long.parseLong(nameInput4.getText().toString());
+                    if(mačoLaikas <60000 || mačoLaikas>300000) {
                         Toast.makeText(PlayActivity.this, getResources().getString(R.string.WrongNumber), Toast.LENGTH_LONG).show();
                         builder4.show();
+                    }
+                    else{
+
+                        WhiteTimerTextView.setText(String.valueOf(mačoLaikas/1000));
+                        BlackTimerTextView.setText(String.valueOf(mačoLaikas/1000));
                     }
 
                  }
@@ -73,9 +91,8 @@ public class PlayActivity extends AppCompatActivity {
                     Toast.makeText(PlayActivity.this, getResources().getString(R.string.NumberPlease), Toast.LENGTH_LONG).show();
                     builder4.show();
                 }
-
-
             }
+
         });
 
         builder4.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -87,6 +104,28 @@ public class PlayActivity extends AppCompatActivity {
         });
 
 
+        WhiteTimer = new CountDownTimer(testlaikas, 1000) {
+            @Override
+            public void onTick(long l) {
+                WhiteTimerTextView.setText(String.valueOf((l/1000)));
+            }
+
+            @Override
+            public void onFinish() {
+                gameOver(v, "Black");
+            }
+        };
+        BlackTimer = new CountDownTimer(testlaikas, 1000) {
+            @Override
+            public void onTick(long l) {
+                BlackTimerTextView.setText(String.valueOf((l/1000)));
+            }
+
+            @Override
+            public void onFinish() {
+                gameOver(v, "White");
+            }
+        };
 
 
 
@@ -157,8 +196,13 @@ public class PlayActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        boardLogic = new BoardLogic();
+        boardLogic = new BoardLogic(WhiteTimer, BlackTimer);
+
+
+
+        WhiteTimer.start();
     }
+
     public void boardBackgroundV(){
         SharedPreferences pref = getSharedPreferences("BG_VAL", MODE_PRIVATE);
         int bg_val = pref.getInt("BG_VAL", 1);
@@ -221,6 +265,7 @@ public class PlayActivity extends AppCompatActivity {
         } else if (boardLogic.BlackCaptured == 12) {
             gameOver(V, "Black");
         }
+
 
     }
     public void pauseMenu(View V){

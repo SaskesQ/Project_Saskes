@@ -32,10 +32,10 @@
     <string name="t20">20</string>
     <string name="t25">25</string>
     <string name="t30">30</string>
-    <string name="TimeTittle">" Mačo trukmė:"</string>
-    <string name="WrongNumber">Skaičius yra didesnis už 30 arba mažesnis už 5</string>
+    <string name="TimeTittle">"Ėjimo trukmė:"</string>
+    <string name="WrongNumber">Skaičius yra didesnis už 5 arba mažesnis už 1</string>
     <string name="NumberPlease">Prašau parašyti skaičių</string>
-    <string name="Timemessage">Pasirinkite mačo trukmę(nuo 5 iki 30 minučių):</string>
+    <string name="Timemessage">Pasirinkite mačo trukmę(nuo 1 iki 5 minučių):</string>
     <string name="cancel">Atšaukti</string>
     <string name="done">Baigti</string>
     <string name="timeSettings">Žaidimo nustatymai</string>
