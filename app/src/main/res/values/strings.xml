@@ -47,4 +47,8 @@
     <string name="done">Done</string>
     <string name="timeSettings">Game options</string>
     <string name="cont">Continue</string>
+    <string name="leaderboardTxt">Leaderboard</string>
+    <string name="historyTxt">History</string>
+    <string name="historyBtn">History</string>
+    <string name="leadBtn">Leaderboard</string>
 </resources>

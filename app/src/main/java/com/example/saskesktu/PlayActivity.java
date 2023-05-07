@@ -12,7 +12,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +51,7 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
         BlackCapturedTextView = findViewById(R.id.textView12);
         WhiteCapturedTextView = findViewById(R.id.textView11);
-        Player1TextView= findViewById(R.id.textView13);
+        Player1TextView= findViewById(R.id.leadb);
         Player2TextView= findViewById(R.id.textView14);
         WhiteTimerTextView = findViewById(R.id.whitetimer);
         BlackTimerTextView = findViewById(R.id.blacktimer);

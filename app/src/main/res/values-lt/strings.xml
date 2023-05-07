@@ -40,4 +40,8 @@
     <string name="done">Baigti</string>
     <string name="timeSettings">Žaidimo nustatymai</string>
     <string name="cont">Tęsti</string>
+    <string name="leaderboardTxt">Žaidėjų pasiekimai</string>
+    <string name="historyTxt">Istorija</string>
+    <string name="historyBtn">Istorija</string>
+    <string name="leadBtn">Lyderių lenta</string>
 </resources>

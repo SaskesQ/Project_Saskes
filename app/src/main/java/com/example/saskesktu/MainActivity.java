@@ -26,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Kintamieji reikalingi background muzikai
     MediaPlayer backgroundSong;
-    //Kintamieji kalbos keitimui
-    Resources resources;
-    Context context;
     boolean isPlaying = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +97,16 @@ public class MainActivity extends AppCompatActivity {
     public void credits(View v)
     {
         Intent intent = new Intent(this, CreditsActivity.class);
+        startActivity(intent);
+    }
+    public void history(View v)
+    {
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+    }
+    public void leaderboard(View v)
+    {
+        Intent intent = new Intent(this, LeaderboardActivity.class);
         startActivity(intent);
     }
 

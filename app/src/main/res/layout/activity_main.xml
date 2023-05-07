@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/mainLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/backgroundd"
     android:orientation="vertical"
     android:visibility="visible"
-    android:id="@+id/mainLayout"
     tools:context=".MainActivity"
     tools:visibility="visible">
 
@@ -142,7 +142,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="92dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingTop="25dp">
@@ -151,7 +151,6 @@
             android:id="@+id/help"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:background="@drawable/custom_button"
             android:onClick="help"
             android:text="@string/help"
             android:textColor="#000000"
@@ -161,16 +160,55 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:paddingTop="25dp">
+
+        <Button
+            android:id="@+id/history"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:backgroundTint="#A16E570A"
+            android:gravity="center"
+            android:hapticFeedbackEnabled="false"
+            android:onClick="history"
+            android:text="@string/historyBtn"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:translationX="130dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:paddingTop="25dp"
+        android:translationX="130dp">
+
+        <Button
+            android:id="@+id/leaderboard"
+            android:layout_width="155dp"
+            android:layout_height="60dp"
+            android:backgroundTint="#A16E570A"
+            android:onClick="leaderboard"
+            android:text="@string/leadBtn"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="175dp">
+        android:paddingTop="25dp">
 
         <Button
             android:id="@+id/credits"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:background="@drawable/custom_button"
             android:onClick="credits"
             android:text="@string/credits"
             android:textColor="#000000"
