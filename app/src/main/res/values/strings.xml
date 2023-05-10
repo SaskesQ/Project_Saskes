@@ -51,4 +51,9 @@
     <string name="historyTxt">History</string>
     <string name="historyBtn">History</string>
     <string name="leadBtn">Leaderboard</string>
+    <string name="noScoreData">There is no data yet</string>
+    <string name="nameScore">Name</string>
+    <string name="winsScore">Wins</string>
+    <string name="sureDelete">Are you sure you want to delete all data?</string>
+    <string name="delData">DELETE</string>
 </resources>

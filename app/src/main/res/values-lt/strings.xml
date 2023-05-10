@@ -44,4 +44,9 @@
     <string name="historyTxt">Istorija</string>
     <string name="historyBtn">Istorija</string>
     <string name="leadBtn">Lyderių lenta</string>
+    <string name="noScoreData">Duomenų kol kas nėra</string>
+    <string name="nameScore">Vardas</string>
+    <string name="winsScore">Laimėjimai</string>
+    <string name="sureDelete">Ar tikrai norite ištrinti visą informaciją?</string>
+    <string name="delData">IŠTRINTI</string>
 </resources>

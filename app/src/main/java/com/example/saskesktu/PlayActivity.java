@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -305,6 +306,18 @@ public class PlayActivity extends AppCompatActivity {
         builder.setMessage(getResources().getString(R.string.winner) + " " + winner + "!")
                 .setTitle(getResources().getString(R.string.gameover));
 
+        //For score table
+        SharedPreferences prefs = getSharedPreferences("player_scores", MODE_PRIVATE);
+        PlayerScoreManager scoreManager = new PlayerScoreManager();
+
+        if(winner == "White"){
+            Log.d("Winner", "White" + player2Name);
+            scoreManager.addScore(player2Name, prefs);
+        }else{
+            Log.d("Winner", "Black" + player1Name);
+            scoreManager.addScore(player1Name, prefs);
+        }
+        //--------------------
         // Add a button to the popup window
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

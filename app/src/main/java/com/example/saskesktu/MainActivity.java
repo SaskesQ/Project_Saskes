@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     //Kintamieji reikalingi background muzikai
     MediaPlayer backgroundSong;
     boolean isPlaying = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 recreate();
             }
         });
+
+        SharedPreferences prefs = getSharedPreferences("player_scores", MODE_PRIVATE);
+        PlayerScoreManager scoreManager = new PlayerScoreManager();
+        PlayerScore score = new PlayerScore("testasd",21);
+
+        //scoreManager.clearAllScores(prefs);
+        //scoreManager.addScore("", prefs);
+        //Log.d("Error", "Test" + score.toString());
     }
     //metodas pakeisti kalbai
     private void updateLanguage(String langCode) {

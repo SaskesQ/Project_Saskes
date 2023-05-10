@@ -1,41 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundd"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/leadb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="17dp"
+        android:paddingTop="20dp"
+        android:text="@string/leaderboardTxt"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:translationX="75dp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#A16E570A"
+        android:onClick="backButton"
+        android:text="Back"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:translationX="100dp"
+        android:translationY="690dp" />
+
+    <ImageView
+        android:id="@+id/deleteData"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_weight="0"
+        android:background="#A16E570A"
+        android:clickable="false"
+        android:onClick="deleteAllScoreTableData"
+        android:translationX="325dp"
+        android:translationY="650dp"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="#D9EDA64A"
+        android:padding="16dp"
+        android:translationY="20dp">
 
         <TextView
-            android:id="@+id/leadb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="17dp"
-            android:paddingTop="20dp"
-            android:text="@string/leaderboardTxt"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="40sp"
+            android:text="@string/nameScore"
+            android:textSize="30sp"
             android:textStyle="bold"
-            android:translationX="75dp" />
+            android:translationX="80dp"
+            android:translationY="-10dp" />
 
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:backgroundTint="#A16E570A"
-            android:onClick="backButton"
-            android:text="Back"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:translationX="100dp"
-            android:translationY="600dp" />
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/winsScore"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:translationX="115dp"
+            android:translationY="-10dp" />
+
+    </TableRow>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#CCEFC793">
+
+            <TableLayout
+                android:id="@+id/scores_table"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:translationX="80dp">
+
+                <!-- dynamically add rows for each player score -->
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/noDataScoreTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCEFC793"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
