@@ -20,14 +20,12 @@ public class PlayerScoreManager{
 
     public void addScore(String name, SharedPreferences prefs) {
 
-        if(!addToExistingScore(prefs, name))
+        if(!addToExistingScore(prefs, name) && name!=null)
         {
             PlayerScore score =new PlayerScore(name, 1);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString(score.getName(), String.valueOf(score.getScore()));
             editor.apply();
-            Log.d("Test", "plr: " + prefs.getString(name, null));
-            Log.d("Test","plr: " + name);
         }
 
     }
