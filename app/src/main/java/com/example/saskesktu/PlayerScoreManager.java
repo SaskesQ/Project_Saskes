@@ -53,7 +53,8 @@ public class PlayerScoreManager{
     }
     public boolean addToExistingScore(SharedPreferences prefs, String pName){
 
-        if(prefs.getString(pName,null) != null){
+        if(prefs.getString(pName,null) != null && pName!= null)
+        {
             int newScore = Integer.parseInt(prefs.getString(pName, null)) + 1;
             prefs.edit().putString(pName, String.valueOf(newScore)).apply();
             return true;
