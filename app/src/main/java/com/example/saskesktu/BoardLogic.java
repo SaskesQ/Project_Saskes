@@ -33,6 +33,11 @@ public class BoardLogic extends PlayActivity {
 
     boolean whichSide = false; //0 - raudoni 1 - juodi
 
+    int highlightedPieces[];
+    String highlightedPieces_status[];
+
+    int highlightedPieces_index;
+
     public BoardLogic(CountDownTimer WhiteTimer, CountDownTimer BlackTimer){
         if(WhiteTimer == null) {
             throw new IllegalArgumentException("WhiteTimer cannot be null");
@@ -62,6 +67,10 @@ public class BoardLogic extends PlayActivity {
 
         pressedStatus = false;
         pressedId = -1;
+
+        highlightedPieces = new int[10];
+        highlightedPieces_status = new String[10];
+        highlightedPieces_index = 0;
     }
 
     /**
@@ -394,6 +403,11 @@ public class BoardLogic extends PlayActivity {
             }
         }
         for(int i = 0; i < 40; i++) {
+        Log.d("kirtimas", Integer.toString(possibleMoves[i]));
+        }
+
+
+        for(int i = 0; i < 40; i++) {
             int kuriKryptis = i / 10;
             int kurisJudesys = i % 10;
 
@@ -403,10 +417,22 @@ public class BoardLogic extends PlayActivity {
                     if (statusArray[possibleMoves[i]] == "Black" || statusArray[possibleMoves[i]] == "QBlack") {
                         if(possibleMoves[i+1] != -1) {
                             if (statusArray[possibleMoves[i + 1]] == "0") {
-                                galimiKirtimai[KirtimaiIndex] = possibleMoves[i];
-                                KirtimaiIndex++;
-                                Log.d("rasta", statusArray[possibleMoves[i]]);
-                                i = (kuriKryptis + 1) * 10;
+                                    if(kurisJudesys != 0)
+                                    {
+                                        Log.d("situacija", statusArray[possibleMoves[i - 1]]);
+                                        if(statusArray[possibleMoves[i - 1]] == "0" || statusArray[possibleMoves[i - 1]] == "AvailableMove" || statusArray[possibleMoves[i - 1]] == "QLightPressed")
+                                        {
+                                            galimiKirtimai[KirtimaiIndex] = possibleMoves[i];
+                                            KirtimaiIndex++;
+                                            Log.d("rasta", statusArray[possibleMoves[i]]);
+                                            i = ((kuriKryptis + 1) * 10) - 1;
+                                        }
+                                    }else{
+                                        galimiKirtimai[KirtimaiIndex] = possibleMoves[i];
+                                        KirtimaiIndex++;
+                                        Log.d("rasta", statusArray[possibleMoves[i]]);
+                                        i = ((kuriKryptis + 1) * 10)-1;
+                                    }
                             }
                         }
 
@@ -415,10 +441,21 @@ public class BoardLogic extends PlayActivity {
                     if (statusArray[possibleMoves[i]] == "Light" || statusArray[possibleMoves[i]] == "QLight") {
                         if(possibleMoves[i+1] != -1) {
                             if (statusArray[possibleMoves[i + 1]] == "0") {
-                                galimiKirtimai[KirtimaiIndex] = possibleMoves[i];
-                                KirtimaiIndex++;
-                                Log.d("rasta", statusArray[possibleMoves[i]]);
-                                i = (kuriKryptis + 1) * 10;
+                                if(kurisJudesys != 0)
+                                {
+                                    if(statusArray[possibleMoves[i - 1]] == "0" || statusArray[possibleMoves[i - 1]] == "AvailableMove" || statusArray[possibleMoves[i - 1]] == "QBlackPressed")
+                                    {
+                                        galimiKirtimai[KirtimaiIndex] = possibleMoves[i];
+                                        KirtimaiIndex++;
+                                        Log.d("rasta", statusArray[possibleMoves[i]]);
+                                        i = ((kuriKryptis + 1) * 10) - 1;
+                                    }
+                                }else{
+                                    galimiKirtimai[KirtimaiIndex] = possibleMoves[i];
+                                    KirtimaiIndex++;
+                                    Log.d("rasta", statusArray[possibleMoves[i]]);
+                                    i = ((kuriKryptis + 1) * 10)-1;
+                                }
                             }
                         }
 
@@ -923,6 +960,271 @@ public class BoardLogic extends PlayActivity {
         return false;
     }
 
+    public void UnHighlightPossibleKirtimai(View V, Context C)
+    {
+        for(int i = 0; i < highlightedPieces_index; i++)
+        {
+            if(highlightedPieces_status[i] == "Black")
+            {
+                View testV = V.findViewById(checkerIDs[highlightedPieces[i]]);
+
+                testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
+            }else if(highlightedPieces_status[i] == "QBlack")
+            {
+                View testV = V.findViewById(checkerIDs[highlightedPieces[i]]);
+
+                testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+            }else if(highlightedPieces_status[i] == "Light")
+            {
+                View testV = V.findViewById(checkerIDs[highlightedPieces[i]]);
+
+                testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece));
+            }else if(highlightedPieces_status[i] == "QLight")
+            {
+                View testV = V.findViewById(checkerIDs[highlightedPieces[i]]);
+
+                testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
+            }
+        }
+        highlightedPieces_index=0;
+    }
+    public void HighlightPossibleKirtimai(View V, Context C, int pressedId, String status)
+    {
+
+        if(status == "Black" || status == "Light")
+        {
+
+            int[] possibleMoves = FindAllPossibleKirtimai(pressedId, statusArray[pressedId]);
+
+            for(int i = 0; i < 40; i++)
+            {
+                if(possibleMoves[i] != -1)
+                {
+                    if(status == "Light")
+                    {
+                        if(statusArray[possibleMoves[i]] == "Black")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "Black";
+                            highlightedPieces_index++;
+
+                        }else if(statusArray[possibleMoves[i]] == "QBlack")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "QBlack";
+                            highlightedPieces_index++;
+                        }
+                    }else if(status == "Black")
+                    {
+                        if(statusArray[possibleMoves[i]] == "Light")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "Light";
+                            highlightedPieces_index++;
+
+                        }else if(statusArray[possibleMoves[i]] == "QLight")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "QLight";
+                            highlightedPieces_index++;
+                        }
+                    }
+                }
+            }
+        }else if(status == "QLight" || status == "QBlack")
+        {
+
+            int[] possibleMoves = FindAllPossibleKirtimaiQueen(pressedId, statusArray[pressedId]);
+
+            for(int i = 0; i < 40; i++)
+            {
+                if(possibleMoves[i] != -1)
+                {
+                    if(status == "QLight")
+                    {
+                        if(statusArray[possibleMoves[i]] == "Black")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "Black";
+                            highlightedPieces_index++;
+
+                        }else if(statusArray[possibleMoves[i]] == "QBlack")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "QBlack";
+                            highlightedPieces_index++;
+                        }
+                    }else if(status == "QBlack")
+                    {
+                        if(statusArray[possibleMoves[i]] == "Light")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "Light";
+                            highlightedPieces_index++;
+
+                        }else if(statusArray[possibleMoves[i]] == "QLight")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "QLight";
+                            highlightedPieces_index++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public void HighlightPossibleKirtimai2(View V, Context C, int pressedId, String status)
+    {
+
+        if(status == "Black" || status == "Light")
+        {
+
+            int[] possibleMoves = FindAllPossibleKirtimai2(pressedId, statusArray[pressedId]);
+
+            for(int i = 0; i < 40; i++)
+            {
+                if(possibleMoves[i] != -1)
+                {
+                    if(status == "Light")
+                    {
+                        if(statusArray[possibleMoves[i]] == "Black")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "Black";
+                            highlightedPieces_index++;
+
+                        }else if(statusArray[possibleMoves[i]] == "QBlack")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "QBlack";
+                            highlightedPieces_index++;
+                        }
+                    }else if(status == "Black")
+                    {
+                        if(statusArray[possibleMoves[i]] == "Light")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "Light";
+                            highlightedPieces_index++;
+
+                        }else if(statusArray[possibleMoves[i]] == "QLight")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "QLight";
+                            highlightedPieces_index++;
+                        }
+                    }
+                }
+            }
+        }else if(status == "QLight" || status == "QBlack")
+        {
+
+            int[] possibleMoves = FindAllPossibleKirtimaiQueen(pressedId, statusArray[pressedId]);
+
+            for(int i = 0; i < 40; i++)
+            {
+                if(possibleMoves[i] != -1)
+                {
+                    if(status == "QLight")
+                    {
+                        if(statusArray[possibleMoves[i]] == "Black")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "Black";
+                            highlightedPieces_index++;
+
+                        }else if(statusArray[possibleMoves[i]] == "QBlack")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "QBlack";
+                            highlightedPieces_index++;
+                        }
+                    }else if(status == "QBlack")
+                    {
+                        if(statusArray[possibleMoves[i]] == "Light")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "Light";
+                            highlightedPieces_index++;
+
+                        }else if(statusArray[possibleMoves[i]] == "QLight")
+                        {
+                            View testV = V.findViewById(checkerIDs[possibleMoves[i]]);
+
+                            testV.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece_highlight));
+
+                            highlightedPieces[highlightedPieces_index] = possibleMoves[i];
+                            highlightedPieces_status[highlightedPieces_index] = "QLight";
+                            highlightedPieces_index++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Pagrindinė funkcija šaškių paspaudimų valdymui.
      * ** Pakoreguota funkcija. Pridėta karlienės paspaudimo valdymas
@@ -949,6 +1251,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = placeId;
 
                     HighlightPossibleMoves(LayoutView, C, placeId, "Light");
+                    HighlightPossibleKirtimai(LayoutView, C, placeId, "Light");
                     break;
                 case "QLight": //karalienes paspaudimas
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece_pressed));
@@ -957,6 +1260,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = placeId;
 
                     HighlightPossibleMoves(LayoutView, C, placeId, "QLight");
+                    HighlightPossibleKirtimai(LayoutView, C, placeId, "QLight");
                     break;
             }
         }else{
@@ -969,6 +1273,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = -1;
 
                     removeHighlightedMoves(LayoutView, C);
+                    UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
                 case "QLightPressed":
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
@@ -978,6 +1283,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = -1;
 
                     removeHighlightedMoves(LayoutView, C);
+                    UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
                 case "AvailableMove":
                     MoveCheckerPiece(LayoutView, C, pressedId, placeId);
@@ -990,6 +1296,7 @@ public class BoardLogic extends PlayActivity {
                     pressedStatus = false;
                     pressedId = -1;
                     whichSide = !whichSide;
+                    UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
                 case "QBlack":
                 case "Black":
@@ -1005,11 +1312,13 @@ public class BoardLogic extends PlayActivity {
                             {
                                 if(possibleMoves[i] == placeId)
                                 {
+                                    UnHighlightPossibleKirtimai(LayoutView, C);
                                     Kirtimas(LayoutView, C, pressedId, placeId, "Light");
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
                                     whichSide = !whichSide;
+
                                 }
                             }
                         }
@@ -1022,11 +1331,13 @@ public class BoardLogic extends PlayActivity {
                             {
                                 if(possibleMoves[i] == placeId)
                                 {
+                                    UnHighlightPossibleKirtimai(LayoutView, C);
                                     Kirtimas(LayoutView, C, pressedId, placeId, "QLight");
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
                                     whichSide = !whichSide;
+
                                 }
                             }
                         }
@@ -1050,6 +1361,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = placeId;
 
                     HighlightPossibleMoves(LayoutView, C, placeId, "Black");
+                    HighlightPossibleKirtimai(LayoutView, C, placeId, "Black");
                     break;
                 case "QBlack": //karalienes paspaudimas
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_pressed));
@@ -1058,6 +1370,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = placeId;
 
                     HighlightPossibleMoves(LayoutView, C, placeId, "QBlack");
+                    HighlightPossibleKirtimai(LayoutView, C, placeId, "QBlack");
                     break;
             }
         }else{
@@ -1070,7 +1383,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = -1;
 
                     removeHighlightedMoves(LayoutView, C);
-
+                    UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
 
                 case "QBlackPressed":
@@ -1081,6 +1394,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = -1;
 
                     removeHighlightedMoves(LayoutView, C);
+                    UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
                 case "AvailableMove":
                     MoveCheckerPiece(LayoutView, C, pressedId, placeId);
@@ -1093,6 +1407,7 @@ public class BoardLogic extends PlayActivity {
                     pressedStatus = false;
                     pressedId = -1;
                     whichSide = !whichSide;
+                    UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
                 case "QLight":
                 case "Light":
@@ -1106,11 +1421,13 @@ public class BoardLogic extends PlayActivity {
                         {
                             if(possibleMoves[i] != -1) {
                                 if (possibleMoves[i] == placeId) {
+                                    UnHighlightPossibleKirtimai(LayoutView, C);
                                     Kirtimas(LayoutView, C, pressedId, placeId, "Black");
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
                                     whichSide = !whichSide;
+
                                 }
                             }
                         }
@@ -1123,11 +1440,13 @@ public class BoardLogic extends PlayActivity {
 
                             if(possibleMoves[i] != -1) {
                                 if (possibleMoves[i] == placeId) {
+                                    UnHighlightPossibleKirtimai(LayoutView, C);
                                     Kirtimas(LayoutView, C, pressedId, placeId, "QBlack");
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
                                     whichSide = !whichSide;
+
                                 }
                             }
                         }
@@ -1460,7 +1779,8 @@ public class BoardLogic extends PlayActivity {
 
     }
     public void CheckerClicked2(View checkerView, Context C, View LayoutView, int placeId) {
-
+    if(whichSide == false)
+    {
         if(!pressedStatus)
         {
 
@@ -1474,16 +1794,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = placeId;
 
                     HighlightPossibleMoves2(LayoutView, C, placeId, "Light");
-                    break;
-
-                case "Black":
-                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_pressed));
-
-                    statusArray[placeId] = "BlackPressed";
-                    pressedStatus = true;
-                    pressedId = placeId;
-
-                    HighlightPossibleMoves2(LayoutView, C, placeId, "Black");
+                    HighlightPossibleKirtimai2(LayoutView, C, placeId, "Light");
                     break;
                 case "QLight": //karalienes paspaudimas
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece_pressed));
@@ -1492,14 +1803,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = placeId;
 
                     HighlightPossibleMoves2(LayoutView, C, placeId, "QLight");
-                    break;
-                case "QBlack": //karalienes paspaudimas
-                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_pressed));
-                    statusArray[placeId] = "QBlackPressed";
-                    pressedStatus = true;
-                    pressedId = placeId;
-
-                    HighlightPossibleMoves2(LayoutView, C, placeId, "QBlack");
+                    HighlightPossibleKirtimai2(LayoutView, C, placeId, "QLight");
                     break;
             }
         }else{
@@ -1512,27 +1816,9 @@ public class BoardLogic extends PlayActivity {
                     pressedId = -1;
 
                     removeHighlightedMoves(LayoutView, C);
-
+                    UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
 
-                case "BlackPressed":
-                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
-
-                    statusArray[placeId] = "Black";
-                    pressedStatus = false;
-                    pressedId = -1;
-
-                    removeHighlightedMoves(LayoutView, C);
-                    break;
-                case "QBlackPressed":
-                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
-
-                    statusArray[placeId] = "QBlack";
-                    pressedStatus = false;
-                    pressedId = -1;
-
-                    removeHighlightedMoves(LayoutView, C);
-                    break;
                 case "QLightPressed":
                     checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.light_king_piece));
 
@@ -1541,6 +1827,7 @@ public class BoardLogic extends PlayActivity {
                     pressedId = -1;
 
                     removeHighlightedMoves(LayoutView, C);
+                    UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
                 case "AvailableMove":
                     MoveCheckerPiece2(LayoutView, C, pressedId, placeId);
@@ -1551,7 +1838,114 @@ public class BoardLogic extends PlayActivity {
                     statusArray[pressedId] = "0";
                     pressedStatus = false;
                     pressedId = -1;
+                    UnHighlightPossibleKirtimai(LayoutView, C);
+                    whichSide = !whichSide;
+                    break;
 
+                case "QBlack":
+                case "Black":
+                    //Log.d("test", statusArray[pressedId]);
+                    if(statusArray[pressedId] == "LightPressed")
+                    {
+
+                        int[] possibleMoves = FindAllPossibleKirtimai2(pressedId, statusArray[pressedId]);
+
+                        for(int i = 0; i < 40; i++)
+                        {
+                            if(possibleMoves[i] != -1) {
+                                if (possibleMoves[i] == placeId) {
+                                    UnHighlightPossibleKirtimai(LayoutView, C);
+                                    Kirtimas2(LayoutView, C, pressedId, placeId, "Light");
+                                    removeHighlightedMoves(LayoutView, C);
+                                    pressedStatus = false;
+                                    pressedId = -1;
+                                    whichSide = !whichSide;
+                                }
+                            }
+                        }
+                    }else if(statusArray[pressedId] == "QLightPressed"){
+                        int[] possibleMoves = FindAllPossibleKirtimaiQueen(pressedId, statusArray[pressedId]);
+                        for(int i = 0; i < 40; i++)
+                        {
+//                            Log.d("test", Integer.toString(possibleMoves[i]));
+                            if(possibleMoves[i] != -1)
+                            {
+                                if(possibleMoves[i] == placeId)
+                                {
+                                    UnHighlightPossibleKirtimai(LayoutView, C);
+                                    Kirtimas2(LayoutView, C, pressedId, placeId, "QLight");
+                                    removeHighlightedMoves(LayoutView, C);
+                                    pressedStatus = false;
+                                    pressedId = -1;
+                                    whichSide = !whichSide;
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+    }else{
+        if(!pressedStatus)
+        {
+
+            switch(statusArray[placeId])
+            {
+                case "Black":
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece_pressed));
+
+                    statusArray[placeId] = "BlackPressed";
+                    pressedStatus = true;
+                    pressedId = placeId;
+
+                    HighlightPossibleMoves2(LayoutView, C, placeId, "Black");
+                    HighlightPossibleKirtimai2(LayoutView, C, placeId, "Black");
+                    break;
+
+                case "QBlack": //karalienes paspaudimas
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece_pressed));
+                    statusArray[placeId] = "QBlackPressed";
+                    pressedStatus = true;
+                    pressedId = placeId;
+
+                    HighlightPossibleMoves2(LayoutView, C, placeId, "QBlack");
+                    HighlightPossibleKirtimai2(LayoutView, C, placeId, "QBlack");
+                    break;
+            }
+        }else{
+            switch(statusArray[placeId]) {
+
+                case "BlackPressed":
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_piece));
+
+                    statusArray[placeId] = "Black";
+                    pressedStatus = false;
+                    pressedId = -1;
+
+                    removeHighlightedMoves(LayoutView, C);
+                    UnHighlightPossibleKirtimai(LayoutView, C);
+                    break;
+                case "QBlackPressed":
+                    checkerView.setBackground(ContextCompat.getDrawable(C, R.drawable.dark_king_piece));
+
+                    statusArray[placeId] = "QBlack";
+                    pressedStatus = false;
+                    pressedId = -1;
+
+                    removeHighlightedMoves(LayoutView, C);
+                    UnHighlightPossibleKirtimai(LayoutView, C);
+                    break;
+                case "AvailableMove":
+                    MoveCheckerPiece2(LayoutView, C, pressedId, placeId);
+                    View switch_button = LayoutView.findViewById(R.id.switch_sides);
+                    switch_button.setVisibility(View.INVISIBLE);
+                    move_count= move_count + 1;
+                    removeHighlightedMoves(LayoutView, C);//
+                    statusArray[pressedId] = "0";
+                    pressedStatus = false;
+                    pressedId = -1;
+                    UnHighlightPossibleKirtimai(LayoutView, C);
+                    whichSide = !whichSide;
                     break;
                 case "QLight":
                 case "Light":
@@ -1567,10 +1961,12 @@ public class BoardLogic extends PlayActivity {
                             {
                                 if(possibleMoves[i] == placeId)
                                 {
+                                    UnHighlightPossibleKirtimai(LayoutView, C);
                                     Kirtimas2(LayoutView, C, pressedId, placeId, "Black");
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
+                                    whichSide = !whichSide;
                                 }
                             }
                         }
@@ -1582,47 +1978,12 @@ public class BoardLogic extends PlayActivity {
 
                             if(possibleMoves[i] != -1) {
                                 if (possibleMoves[i] == placeId) {
+                                    UnHighlightPossibleKirtimai(LayoutView, C);
                                     Kirtimas2(LayoutView, C, pressedId, placeId, "QBlack");
                                     removeHighlightedMoves(LayoutView, C);
                                     pressedStatus = false;
                                     pressedId = -1;
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case "QBlack":
-                case "Black":
-                    //Log.d("test", statusArray[pressedId]);
-                    if(statusArray[pressedId] == "LightPressed")
-                    {
-
-                        int[] possibleMoves = FindAllPossibleKirtimai2(pressedId, statusArray[pressedId]);
-
-                        for(int i = 0; i < 40; i++)
-                        {
-                            if(possibleMoves[i] != -1) {
-                                if (possibleMoves[i] == placeId) {
-                                    Kirtimas2(LayoutView, C, pressedId, placeId, "Light");
-                                    removeHighlightedMoves(LayoutView, C);
-                                    pressedStatus = false;
-                                    pressedId = -1;
-                                }
-                            }
-                        }
-                    }else if(statusArray[pressedId] == "QLightPressed"){
-                        int[] possibleMoves = FindAllPossibleKirtimaiQueen(pressedId, statusArray[pressedId]);
-                        for(int i = 0; i < 40; i++)
-                        {
-//                            Log.d("test", Integer.toString(possibleMoves[i]));
-                            if(possibleMoves[i] != -1)
-                            {
-                                if(possibleMoves[i] == placeId)
-                                {
-                                    Kirtimas2(LayoutView, C, pressedId, placeId, "QLight");
-                                    removeHighlightedMoves(LayoutView, C);
-                                    pressedStatus = false;
-                                    pressedId = -1;
+                                    whichSide = !whichSide;
                                 }
                             }
                         }
@@ -1630,6 +1991,8 @@ public class BoardLogic extends PlayActivity {
                     break;
             }
         }
+    }
+
         EveryCheckerPossibleMoves(2);
     }
 
