@@ -36,7 +36,7 @@ public class PlayActivity extends AppCompatActivity {
     TextView Player1TextView;
     TextView Player2TextView;
 
-    int mačoLaikas;
+    long mačoLaikas=0;
     long testlaikas = 60000;
     long LongLaikas;
     String player1Name;
@@ -73,26 +73,41 @@ public class PlayActivity extends AppCompatActivity {
         builder4.setPositiveButton(getResources().getString(R.string.done), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                try {
                     mačoLaikas = 60000*Integer.parseInt(nameInput4.getText().toString());
-                    LongLaikas = Long.parseLong(nameInput4.getText().toString());
+                    LongLaikas = 60000*Long.parseLong(nameInput4.getText().toString());
                     if(mačoLaikas <60000 || mačoLaikas>300000) {
                         Toast.makeText(PlayActivity.this, getResources().getString(R.string.WrongNumber), Toast.LENGTH_LONG).show();
                         builder4.show();
                     }
-                    else{
 
-                        WhiteTimerTextView.setText(String.valueOf(mačoLaikas/1000));
-                        BlackTimerTextView.setText(String.valueOf(mačoLaikas/1000));
+                WhiteTimer = new CountDownTimer(mačoLaikas, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                        WhiteTimerTextView.setText(String.valueOf((l/1000)));
                     }
 
-                 }
-                catch (NumberFormatException nfe){
-                    Toast.makeText(PlayActivity.this, getResources().getString(R.string.NumberPlease), Toast.LENGTH_LONG).show();
-                    builder4.show();
-                }
-            }
+                    @Override
+                    public void onFinish() {
+                        gameOver(v, "Black");
+                    }
+                };
+                BlackTimer = new CountDownTimer(mačoLaikas, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                        BlackTimerTextView.setText(String.valueOf((l/1000)));
+                    }
 
+                    @Override
+                    public void onFinish() {
+                        gameOver(v, "White");
+                    }
+                };
+
+                         boardLogic = new BoardLogic(WhiteTimer, BlackTimer);
+                        WhiteTimerTextView.setText(String.valueOf(mačoLaikas/1000));
+                        BlackTimerTextView.setText(String.valueOf(mačoLaikas/1000));
+                        WhiteTimer.start();
+            }
         });
 
         builder4.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -104,28 +119,6 @@ public class PlayActivity extends AppCompatActivity {
         });
 
 
-        WhiteTimer = new CountDownTimer(testlaikas, 1000) {
-            @Override
-            public void onTick(long l) {
-                WhiteTimerTextView.setText(String.valueOf((l/1000)));
-            }
-
-            @Override
-            public void onFinish() {
-                gameOver(v, "Black");
-            }
-        };
-        BlackTimer = new CountDownTimer(testlaikas, 1000) {
-            @Override
-            public void onTick(long l) {
-                BlackTimerTextView.setText(String.valueOf((l/1000)));
-            }
-
-            @Override
-            public void onFinish() {
-                gameOver(v, "White");
-            }
-        };
 
 
 
@@ -196,11 +189,9 @@ public class PlayActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        boardLogic = new BoardLogic(WhiteTimer, BlackTimer);
 
 
 
-        WhiteTimer.start();
     }
 
     public void boardBackgroundV(){
