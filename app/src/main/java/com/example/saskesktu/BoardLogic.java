@@ -720,8 +720,6 @@ public class BoardLogic extends PlayActivity {
         if(statusArray[checkerId] == "BlackPressed"){
 
 
-            BlackTimer.cancel();
-            WhiteTimer.start();
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
 
@@ -738,8 +736,6 @@ public class BoardLogic extends PlayActivity {
             }
         }else if(statusArray[checkerId] == "LightPressed")
         {
-            WhiteTimer.cancel();
-            BlackTimer.start();
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
             boolean queen = CanBeQueen(whereToId, "Light");
@@ -757,8 +753,6 @@ public class BoardLogic extends PlayActivity {
                 statusArray[whereToId] = "Light";
             }
         }else if(statusArray[checkerId] == "QBlackPressed"){
-            BlackTimer.cancel();
-            WhiteTimer.start();
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
 
@@ -766,8 +760,6 @@ public class BoardLogic extends PlayActivity {
             source.setBackground(ContextCompat.getDrawable(C, R.drawable.blank_square));
             statusArray[whereToId] = "QBlack";
         }else if(statusArray[checkerId] == "QLightPressed"){
-            WhiteTimer.cancel();
-            BlackTimer.start();
             View destination = V.findViewById(checkerIDs[whereToId]);
             View source = V.findViewById(checkerIDs[checkerId]);
 
@@ -1384,6 +1376,8 @@ public class BoardLogic extends PlayActivity {
                     pressedStatus = false;
                     pressedId = -1;
                     whichSide = !whichSide;
+                    WhiteTimer.cancel();
+                    BlackTimer.start();
                     UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
                 case "QBlack":
@@ -1417,6 +1411,8 @@ public class BoardLogic extends PlayActivity {
                                     if(!rastasKirtimas)
                                     {
                                         whichSide = !whichSide;
+                                        WhiteTimer.cancel();
+                                        BlackTimer.start();
                                         rastasKirtimas = false;
                                     }
                                     pressedStatus = false;
@@ -1449,6 +1445,8 @@ public class BoardLogic extends PlayActivity {
                                     if(!rastasKirtimas)
                                     {
                                         whichSide = !whichSide;
+                                        WhiteTimer.cancel();
+                                        BlackTimer.start();
                                         rastasKirtimas = false;
                                     }
                                     pressedStatus = false;
@@ -1526,6 +1524,8 @@ public class BoardLogic extends PlayActivity {
                     pressedStatus = false;
                     pressedId = -1;
                     whichSide = !whichSide;
+                    BlackTimer.cancel();
+                    WhiteTimer.start();
                     UnHighlightPossibleKirtimai(LayoutView, C);
                     break;
                 case "QLight":
@@ -1556,6 +1556,8 @@ public class BoardLogic extends PlayActivity {
                                     if(!rastasKirtimas)
                                     {
                                         whichSide = !whichSide;
+                                        BlackTimer.cancel();
+                                        WhiteTimer.start();
                                         rastasKirtimas = false;
                                     }
                                     pressedStatus = false;
@@ -1587,6 +1589,8 @@ public class BoardLogic extends PlayActivity {
                                     if(!rastasKirtimas)
                                     {
                                         whichSide = !whichSide;
+                                        BlackTimer.cancel();
+                                        WhiteTimer.start();
                                         rastasKirtimas = false;
                                     }
                                     pressedStatus = false;
@@ -1998,6 +2002,8 @@ public class BoardLogic extends PlayActivity {
                     pressedId = -1;
                     UnHighlightPossibleKirtimai(LayoutView, C);
                     whichSide = !whichSide;
+                    WhiteTimer.cancel();
+                    BlackTimer.start();
                     break;
 
                 case "QBlack":
@@ -2027,6 +2033,8 @@ public class BoardLogic extends PlayActivity {
                                     if(!rastasKirtimas)
                                     {
                                         whichSide = !whichSide;
+                                        WhiteTimer.cancel();
+                                        BlackTimer.start();
                                         rastasKirtimas = false;
                                     }
                                     pressedStatus = false;
@@ -2057,6 +2065,8 @@ public class BoardLogic extends PlayActivity {
                                     if(!rastasKirtimas)
                                     {
                                         whichSide = !whichSide;
+                                        WhiteTimer.cancel();
+                                        BlackTimer.start();
                                         rastasKirtimas = false;
                                     }
                                     pressedStatus = false;
@@ -2133,6 +2143,8 @@ public class BoardLogic extends PlayActivity {
                     pressedId = -1;
                     UnHighlightPossibleKirtimai(LayoutView, C);
                     whichSide = !whichSide;
+                    BlackTimer.cancel();
+                    WhiteTimer.start();
                     break;
                 case "QLight":
                 case "Light":
@@ -2163,7 +2175,9 @@ public class BoardLogic extends PlayActivity {
                                     }
                                     if(!rastasKirtimas)
                                     {
-                                        whichSide = !whichSide;
+                                        whichSide = !whichSide;;
+                                        BlackTimer.cancel();
+                                        WhiteTimer.start();
                                         rastasKirtimas = false;
                                     }
                                     pressedStatus = false;
@@ -2194,7 +2208,9 @@ public class BoardLogic extends PlayActivity {
                                     }
                                     if(!rastasKirtimas)
                                     {
-                                        whichSide = !whichSide;
+                                        whichSide = !whichSide;;
+                                        BlackTimer.cancel();
+                                        WhiteTimer.start();
                                         rastasKirtimas = false;
                                     }
                                     pressedStatus = false;
