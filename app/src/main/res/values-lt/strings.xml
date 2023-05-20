@@ -32,6 +32,9 @@
     <string name="t20">20</string>
     <string name="t25">25</string>
     <string name="t30">30</string>
+    <string name="history_string">Istorija</string>
+    <string name="history_paragraph"><b>Šaškės</b> yra jaunesnis žaidimas už šachmatus. Panašus į šaškes žaidimas rastas archeologinių kasinėjimų metu <b>Egipte </b> ir datuojamas <b>600 metų prieš mūsų erą</b>. Į Europą ankstesnioji šaškių versija atkeliavo kartu su maurais, invazijos į Ispaniją metu. Vėliau, apie 1100 metus, Pietų Prancūzijoje žaidimas pritaikytas šachmatų lentai, o tik 1535 m. pristatyta privalomo kirtimo taisyklė.
+        2007 metų liepos 19 d., <b>Kanados Albertos universiteto</b> tyrinėtojai, vadovaujami <b>Džonatano Šeferio (Jonathan Schaeffer)</b> oficialiai paskelbė[1], kad jie išsprendė šaškių žaidimą. Jie surinko informaciją apie bet kokią galimą šaškių partijos metu susidariusią poziciją ir kokį rezultatą duos kitas ėjimas. Padaryta išvada, kad abiem žaidėjams darant geriausius ėjimus pasiekiamas rezultatas –<b> lygiosios </b>. Toks pasiekimas pareikalavo 13 metų kompiuterinės analizės, kad būtų ištyrinėta <b> 500 milijardų įmanomų pozicijų</b>. </string>
     <string name="TimeTittle">"Ėjimo trukmė:"</string>
     <string name="WrongNumber">Skaičius yra didesnis už 5 arba mažesnis už 1</string>
     <string name="NumberPlease">Prašau parašyti skaičių</string>

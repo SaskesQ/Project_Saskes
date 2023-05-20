@@ -2,6 +2,7 @@
     <string name="app_name">SaskesKTU</string>
     <string name="selected_language">English</string>
     <string name="article_string">Article</string>
+    <string name="history_string">History</string>
     <string name="paragraph">The goal of the players in checkers is to cut down all of the opponents
          checkers or create such a situation that the opponent has no more moves.\n\n
          Checkers are played sequentially, one move at a time on black squares. The game is started
@@ -14,6 +15,11 @@
          ("Kings row") turns into a queen, which is given additional powers - it can walk back and
          forth one square at a time (also depending on the set rules of the game). \n\n A checker
          can also turn into a queen during crossing, if it is on the end line during one of the crossing stages.</string>
+    <string name="history_paragraph">While the oldest known <b>Checkers</b>artifact unearthed in Iraq dates back to 3000 BC, the earliest known version of the game comes from a game called <b>Alquerque</b>, which was played in ancient Egypt in 1400 BC. After years of being played the Egyptian way, in <b> 1100 AD</b>, a Frenchman adapted it to be played on a Chessboard with 12 pieces per player.
+        Then, in 1756 an English mathematician created official rules for the game, and in <b>1840</b> was the start of the very first <b>World Championships</b>. <b>Arthur Samuel </b> then created a computerized Checkers program in 1952, which helped turn Checkers into the global phenomenon it is today. In 2007, the game was <b>“solved”</b> by a team of researchers from the University of Alberta (in Canada) led by <b>Jonathan Schaeffer</b>.
+        As you can see, there is not too much depth to the history of Checkers. Who officially created the first version of <b>Checkers</b> is unknown, and even though the oldest Checkers artifact found dates back to 3000 BC, was it perhaps based on a game that has even older origins? There are many unanswered questions when it comes to the history of Checkers.
+That being said, the history of Checkers is somewhat vague in that no one truly knows its exact origins. There are various ancient games that have a similar concept, and so the history of the game is not quite precise.</string>
+
     <string name="checkers">KTU Checkers</string>
     <string name="devs">Developers of the project</string>
     <string name="play">Play</string>
