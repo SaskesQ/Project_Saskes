@@ -35,17 +35,12 @@ public class PlayActivity extends AppCompatActivity {
     TextView WhiteCapturedTextView;
     TextView Player1TextView;
     TextView Player2TextView;
-
     long mačoLaikas=0;
-    long testlaikas = 60000;
     long LongLaikas;
     String player1Name;
-
     String player2Name;
-    MainActivity PLayers;
     boolean switch_status = false;
     View v;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

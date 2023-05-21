@@ -60,14 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 recreate();
             }
         });
-
-        SharedPreferences prefs = getSharedPreferences("player_scores", MODE_PRIVATE);
-        PlayerScoreManager scoreManager = new PlayerScoreManager();
-        PlayerScore score = new PlayerScore("testasd",21);
-
-        //scoreManager.clearAllScores(prefs);
-        //scoreManager.addScore("", prefs);
-        //Log.d("Error", "Test" + score.toString());
     }
     //metodas pakeisti kalbai
     private void updateLanguage(String langCode) {
@@ -83,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     // Atidaro naują langą (naują "Activity")
     public void play(View v)
     {
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(this, PlayActivity.class);
         startActivity(intent);
     }
     public void exit_app(View v){
